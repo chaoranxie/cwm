@@ -1,5 +1,14 @@
 <h1>
   {{title}}
 
+  <div> {{ (user | async)?.uid }} </div>
+  <div> {{ (user | async)?.email }} </div>
+
+  <button (click)="loginGoogle()">Login with Google</button>
+  <button (click)="loginFacebook()">Login with Facebook</button>
+  <button (click)="loginEmailPassword()">Login with Email/Password</button>
+
+  <button (click)="logout()">Logout</button>
+
   <app-climb-list> </app-climb-list>
 </h1>
