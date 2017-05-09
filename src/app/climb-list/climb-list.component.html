@@ -1,0 +1,13 @@
+<ul>
+  <li *ngFor="let item of items | async">
+    {{ item  | json}}
+  </li>
+</ul>
+<div>
+  <h4>Filter by color</h4>
+  <button (click)="filterBy('red')">red</button>
+  <button (click)="filterBy('purple')">purple</button>
+  <button (click)="filterBy('blue')">blue</button>
+</div>
+<!--
+<h1>{{ (item | async)?.name }}</h1> -->
