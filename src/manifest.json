@@ -6,10 +6,10 @@
   "display": "standalone",
   "start_url": "./?utm_source=web_app_manifest",
   "short_name": "cwm",
-  "theme_color": "#f27b00",
+  "theme_color": "#4CAF50",
   "description": "Climb with me app",
   "orientation": "any",
-  "background_color": "#3a1c8d",
+  "background_color": "#FF5722",
   "related_applications": [],
   "prefer_related_applications": false,
   "icons": [
