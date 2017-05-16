@@ -26,7 +26,8 @@ export class AppComponent {
   }
 
   loginEmailPassword() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.EmailAuthProvider());
+    debugger;
+    this.afAuth.auth.signInAnonymously();
   }
 
   logout() {
