@@ -1,7 +1,7 @@
 {
   "dir": "ltr",
   "lang": "en",
-  "name": "Clime with Me",
+  "name": "Climb with Me",
   "scope": "/",
   "display": "standalone",
   "start_url": "./?utm_source=web_app_manifest",
