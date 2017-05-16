@@ -1,5 +1,20 @@
 {
   "static.ignore": [
     "^/assets/ignore.*$"
-  ]
+  ],
+  "routing": {
+    "index": "/index.html",
+    "routes": {
+      "/": {
+        "prefix": false
+      },
+      "/route": {
+        "prefix": true
+      }
+    }
+  },
+  "push": {
+    "showNotifications": true,
+    "backgroundOnly": false
+  }
 }
