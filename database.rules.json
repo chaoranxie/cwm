@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "climbs": {
+      ".read": true,
+      ".write": "auth !== null"
+    }
+  }
+}
