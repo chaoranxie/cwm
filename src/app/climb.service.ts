@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { environment } from '../environments/environment';
-import { Observable, BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-
 import { Climb } from './climb';
 
-
 @Injectable()
-export class ClimbService {
+export class ClimbService implements OnInit {
   // private _climbs: BehaviorSubject<Climb[]> = new BehaviorSubject<Climb[]>([]);
   // public climbs: Observable<Climb[]> = this._climbs.asObservable();
   // constructor(db: AngularFireDatabase) {
