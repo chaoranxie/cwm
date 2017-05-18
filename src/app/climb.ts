@@ -1,10 +1,10 @@
 interface ClimbJSON {
-  setter: string;
+  station: number;
   color: string;
   level: number;
-  station: number;
-  note: string;
+  setter: string;
   setDate: Date;
+  note: string;
 }
 
 export class Climb {
@@ -22,9 +22,11 @@ export class Climb {
   }
 
   constructor(
-    setter: string,
-    color: string,
-    level: number,
-    station: number
+    public station: number,
+    public color: string,
+    public level: number,
+    public setter: string,
+    public setDate: Date,
+    public note: string,
   ) {}
 }
