@@ -1,12 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-// import { MdButtonModule, MdCheckboxModule, MdIconModule, MdChipsModule} from '@angular/material';
 import { MaterialModule } from '@angular/material';
-import { MdDialogModule } from '@angular/material';
-
-// MaterialModul
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -17,27 +11,28 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ClimbListComponent } from './climb-list/climb-list.component';
+import { ClimbService } from './climb.service';
 
 import 'hammerjs';
+import { ClimbComponent } from './climb/climb.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClimbListComponent
+    ClimbListComponent,
+    ClimbComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MdDialogModule,
-    // MdButtonModule, MdCheckboxModule, MdIconModule, MdChipsModule,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule // imports firebase/auth, only needed for auth features
   ],
-  providers: [],
+  providers: [ClimbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
