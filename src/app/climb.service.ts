@@ -18,7 +18,8 @@ export class ClimbService {
   //   // http://stackoverflow.com/questions/39494058/angular-2-behavior-subject-vs-observable
   //   db.list('/climbs').subscribe(
   //     climbsList => {
-  //         const climbs = climbsList.map(Climb.fromJsonList);
+  //         // the map here apply to one object which is a Climb
+  //         const climbs = climbsList.map(Climb.fromJSON);
   //         this._climbs.next(climbs);
   //       }
   //   );
@@ -28,8 +29,10 @@ export class ClimbService {
 
   public climbs: Observable<Climb[]>;
   constructor(db: AngularFireDatabase) {
+    // the map here apply to one object which is a list
     this.climbs = db.list('/climbs').map(Climb.fromJsonList);
   }
+
   ngOnInit() {
 
   }

@@ -10,7 +10,7 @@ import { Climb } from '../climb';
   templateUrl: './climb-list.component.html',
 })
 export class ClimbListComponent implements OnInit {
-  private climbs: Observable<Climb[]>;
+  public climbs: Observable<Climb[]>;
 
   constructor(
     private climbService: ClimbService,
