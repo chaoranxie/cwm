@@ -30,13 +30,17 @@ export class ClimbService implements OnInit {
   public climbs: Observable<Climb[]>;
   constructor(db: AngularFireDatabase) {
     // the map here apply to one object which is a list
-    this.fbClimbs = db.list('/climbs')
+    this.fbClimbs = db.list('/climbs', {
+      query: {
+        orderByChild: 'level',
+      }
+    });
     this.climbs = this.fbClimbs.map(Climb.fromJsonList);
     // debugger
   }
 
   addClimb(climb: Climb) {
-    return this.fbClimbs.push(climb);
+    return this.fbClimbs.push(Climb.toJSON(climb));
   }
 
   ngOnInit() {
