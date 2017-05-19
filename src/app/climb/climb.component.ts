@@ -14,4 +14,8 @@ export class ClimbComponent implements OnInit {
   ngOnInit() {
   }
 
+  markAsCompleted(climb: Climb) {
+    debugger;
+  }
+
 }

@@ -1,7 +1,11 @@
 <md-list-item>
-    <div [ngStyle]="{'background-color': climb.color}" class="circle" ></div>
-    <div>Station: {{climb.station}}</div>
-    <div>Level: 5.{{climb.level}} </div>
+    <!-- <div [ngStyle]="{'background-color': climb.color}" class="circle" ></div> -->
+    <!-- <button [ngStyle]="{'color': climb.color}" md-mini-fab><md-icon>brightness</md-icon></button> -->
+    <md-icon md-list-icon [ngStyle]="{'background-color': climb.color, 'fill': climb.color, 'color': climb.color}">brightness_1</md-icon>
+
+    <div md-line><b>Level:</b> 5.{{climb.level}}  <b>Station:</b> {{climb.station}} </div>
+    <div md-line><b>Setter:</b> {{climb.setter}}  <b>Set date:</b> {{climb.setDate}}</div>
+
     <!-- <p [ngStyle]="{'color': climb.color}">Color {{climb.color}} </p> -->
     <!-- <p> {{climb.note}} </p> -->
     <!-- <p>Set Date: {{climb.setDate | date }} </p> -->
@@ -9,7 +13,14 @@
 
     <!-- <md-icon md-font-library="material-icons" [ngStyle]="{'color': 'red'}">favorite</md-icon> -->
     <!-- <md-icon md-font-library="material-icons" >done</md-icon> -->
-    <button md-mini-fab><md-icon>check</md-icon></button>
+    <!-- <md-icon>favorite_border</md-icon> -->
+
+    <button (click)="markAsCompleted(climb)"><md-icon>check_box_outline_blank</md-icon></button>
+
+
+    <!-- <md-icon>check_box</md-icon>
+    <md-icon>star</md-icon>
+    <md-icon>star_border</md-icon> -->
 
 </md-list-item>
 

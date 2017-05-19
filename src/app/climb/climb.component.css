@@ -1,4 +1,4 @@
-.circle
+/*.circle
 {
     border: 2px solid #a1a1a1;
     padding: 10px 11px;
@@ -8,3 +8,7 @@
     margin-right: auto;
     width: 2%;
 }
+
+md-icon svg {
+  fill: inherit;
+}*/
