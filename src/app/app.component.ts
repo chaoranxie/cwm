@@ -19,12 +19,21 @@ export class AppComponent {
   ) {
   }
 
+  isLoggedIn(): boolean{
+    debugger;
+    return this.userService.afAuth.auth.currentUser !== null;
+  }
+
   addClimb() {
     this.climbService.addClimb();
   }
 
   loginGoogle() {
     this.userService.loginGoogle()
+  }
+
+  logout() {
+    this.userService.logout()
   }
 
 }
