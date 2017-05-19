@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ClimbListComponent } from './climb-list/climb-list.component';
 import { ClimbService } from './climb.service';
+import { UserService } from './user.service';
 
 import 'hammerjs';
 import { ClimbComponent } from './climb/climb.component';
@@ -32,7 +33,10 @@ import { ClimbComponent } from './climb/climb.component';
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule // imports firebase/auth, only needed for auth features
   ],
-  providers: [ClimbService],
+  providers: [
+    ClimbService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
