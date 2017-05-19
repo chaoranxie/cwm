@@ -1,4 +1,5 @@
 interface ClimbJSON {
+  $key: string;
   station: number;
   color: string;
   level: number;
@@ -14,10 +15,22 @@ export class Climb {
     return climbs.map(Climb.fromJSON);
   }
 
+  static toJSON(climb: Climb): any {
+    return {
+      station: climb.station,
+      color: climb.color,
+      level: climb.level,
+      setter: climb.setter,
+      setDate: climb.setDate,
+      note: climb.note,
+    }
+  }
+
   static fromJSON(json: ClimbJSON): Climb {
     const climb = Object.create(Climb.prototype);
     return Object.assign(climb, json, {
-      note: json.note ? json.note : 'No note'
+      note: json.note ? json.note : 'No note',
+      key: json.$key ? json.$key : null
     });
   }
 
@@ -28,5 +41,6 @@ export class Climb {
     public setter: string,
     public setDate: Date,
     public note: string,
+    public key?: string,
   ) {}
 }
