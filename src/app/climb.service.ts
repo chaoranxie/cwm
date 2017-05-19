@@ -32,11 +32,11 @@ export class ClimbService implements OnInit {
     // the map here apply to one object which is a list
     this.fbClimbs = db.list('/climbs')
     this.climbs = this.fbClimbs.map(Climb.fromJsonList);
-    //debugger
+    // debugger
   }
 
-  addClimb() {
-    this.fbClimbs.push(new Climb (76, 'red', 5.9, 'setter', new Date(), 'no note entered'))
+  addClimb(climb: Climb) {
+    return this.fbClimbs.push(climb);
   }
 
   ngOnInit() {

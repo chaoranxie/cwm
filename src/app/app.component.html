@@ -1,10 +1,10 @@
 <app-climb-list> </app-climb-list>
-
-<div *ngIf="isLoggedIn(); else elseBlock">
+<!-- <div *ngIf="isLoggedIn(); else elseBlock"> -->
+<div *ngIf="userService.user | async; else elseBlock">
   <button (click)="addClimb()">Add Climb</button>
   <button (click)="logout()">logout</button>
 
 </div>
-<template #elseBlock>
+<ng-template #elseBlock>
   <button (click)="loginGoogle()">login via Google</button>
-</template>
+</ng-template>

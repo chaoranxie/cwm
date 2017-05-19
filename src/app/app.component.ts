@@ -11,21 +11,22 @@ import { Climb } from './climb';
 })
 export class AppComponent {
 
-
   constructor(
     private climbService: ClimbService,
-    private userService: UserService,
-
+    public userService: UserService,
   ) {
   }
 
-  isLoggedIn(): boolean{
-    debugger;
+  isLoggedIn(): boolean {
+    // Fixme: This is not good, there should be a better way
+    // this.userService.user | async
+
     return this.userService.afAuth.auth.currentUser !== null;
   }
 
   addClimb() {
-    this.climbService.addClimb();
+    const climb: Climb = new Climb (76, 'red', 5.9, 'setter', new Date(), 'no note entered')
+    this.climbService.addClimb(climb);
   }
 
   loginGoogle() {
