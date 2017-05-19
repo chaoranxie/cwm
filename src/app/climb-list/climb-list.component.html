@@ -1,3 +1,7 @@
 <md-list>
- <app-climb [climb]="climb" *ngFor="let climb of climbs | async" ></app-climb>
+
+  <h3 md-subheader>Currently available</h3>
+  <app-climb [climb]="climb" *ngFor="let climb of climbs | async" ></app-climb>
+  <md-divider></md-divider>
+
 </md-list>

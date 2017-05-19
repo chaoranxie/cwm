@@ -1,0 +1,10 @@
+.circle
+{
+    border: 2px solid #a1a1a1;
+    padding: 10px 11px;
+    width: 4px;
+    border-radius: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 2%;
+}

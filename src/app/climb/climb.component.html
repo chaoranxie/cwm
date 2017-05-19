@@ -1,8 +1,44 @@
 <md-list-item>
-    <md-icon md-list-icon>whatshot</md-icon>
-    <h4 md-line>{{climb.station}}</h4>
-    <p md-line> {{climb.level}} </p>
-    <p md-line> {{climb.color}} </p>
-    <p md-line> {{climb.note}} </p>
-    <p md-line> {{climb.setDate | date }} </p>
+    <div [ngStyle]="{'background-color': climb.color}" class="circle" ></div>
+    <div>Station: {{climb.station}}</div>
+    <div>Level: {{climb.level}} </div>
+    <!-- <p [ngStyle]="{'color': climb.color}">Color {{climb.color}} </p> -->
+    <!-- <p> {{climb.note}} </p> -->
+    <!-- <p>Set Date: {{climb.setDate | date }} </p> -->
+    <!-- <p>Setter: {{climb.setter }} </p> -->
+
+    <!-- <md-icon md-font-library="material-icons" [ngStyle]="{'color': 'red'}">favorite</md-icon> -->
+    <md-icon md-font-library="material-icons" >done</md-icon>
+
 </md-list-item>
+
+<!--
+
+<md-list-item [ngStyle]="{'background-color': climb.color}">
+<md-icon md-list-icon>whatshot</md-icon>
+
+<p md-line>Station: {{climb.station}}</p>
+<p md-line>Level {{climb.level}} </p>
+<p md-line [ngStyle]="{'color': climb.color}">Color {{climb.color}} </p>
+<p md-line> {{climb.note}} </p>
+<p md-line>Set Date: {{climb.setDate | date }} </p>
+<p md-line>Setter: {{climb.setter }} </p>
+
+<md-card class="example-card">
+  <md-card-header>
+    <div md-card-avatar class="example-header-image"></div>
+    <md-card-title>Station: {{climb.station}} Color: {{climb.color}} </md-card-title>
+    <md-card-subtitle>Dog Breed</md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="assets/img/examples/shiba2.jpg">
+  <md-card-content>
+    <p>
+        content
+    </p>
+  </md-card-content>
+  <md-card-actions>
+    <md-icon md-font-library="material-icons">favorite</md-icon>
+    <md-icon md-font-library="material-icons">done</md-icon>
+
+  </md-card-actions>
+</md-card> -->
