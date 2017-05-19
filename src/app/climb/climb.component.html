@@ -1,14 +1,15 @@
 <md-list-item>
     <div [ngStyle]="{'background-color': climb.color}" class="circle" ></div>
     <div>Station: {{climb.station}}</div>
-    <div>Level: {{climb.level}} </div>
+    <div>Level: 5.{{climb.level}} </div>
     <!-- <p [ngStyle]="{'color': climb.color}">Color {{climb.color}} </p> -->
     <!-- <p> {{climb.note}} </p> -->
     <!-- <p>Set Date: {{climb.setDate | date }} </p> -->
     <!-- <p>Setter: {{climb.setter }} </p> -->
 
     <!-- <md-icon md-font-library="material-icons" [ngStyle]="{'color': 'red'}">favorite</md-icon> -->
-    <md-icon md-font-library="material-icons" >done</md-icon>
+    <!-- <md-icon md-font-library="material-icons" >done</md-icon> -->
+    <button md-mini-fab><md-icon>check</md-icon></button>
 
 </md-list-item>
 
