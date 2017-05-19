@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ClimbService } from './climb.service';
+import { Climb } from './climb';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+
+  constructor(
+    private climbService: ClimbService,
+  ) {
+  }
+
+  addClimb() {
+    this.climbService.addClimb();
+  }
 
 }

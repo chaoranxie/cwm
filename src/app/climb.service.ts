@@ -26,10 +26,17 @@ export class ClimbService implements OnInit {
   //   db.list('/climbs').subscribe(this._climbs)
   // }
 
+  private fbClimbs: FirebaseListObservable<any>;
   public climbs: Observable<Climb[]>;
   constructor(db: AngularFireDatabase) {
     // the map here apply to one object which is a list
-    this.climbs = db.list('/climbs').map(Climb.fromJsonList);
+    this.fbClimbs = db.list('/climbs')
+    this.climbs = this.fbClimbs.map(Climb.fromJsonList);
+    //debugger
+  }
+
+  addClimb() {
+    this.fbClimbs.push(new Climb (76, 'red', 5.9, 'setter', new Date(), 'no note entered'))
   }
 
   ngOnInit() {
