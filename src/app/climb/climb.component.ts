@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Climb } from '../climb';
 
 @Component({
@@ -9,13 +9,18 @@ import { Climb } from '../climb';
 })
 export class ClimbComponent implements OnInit {
   @Input() climb: Climb;
-  constructor() { }
+
+  @Output() selectedClimb: EventEmitter<string>;
+
+  constructor() {
+    this.selectedClimb = new EventEmitter<string>();
+  }
 
   ngOnInit() {
   }
 
-  markAsCompleted(climb: Climb) {
-    debugger;
+  selectClimb(climb: Climb) {
+    this.selectedClimb.emit(climb.key)
   }
 
 }

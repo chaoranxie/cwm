@@ -1,7 +1,11 @@
 <md-list>
 
   <h3 md-subheader>Currently available</h3>
-  <app-climb [climb]="climb" *ngFor="let climb of climbs | async" ></app-climb>
+  <app-climb
+    [climb]="climb"
+    *ngFor="let climb of climbs | async"
+    (selectedClimb)="markClimbAsCompleted($event)"
+    selectedClimb ></app-climb>
   <md-divider></md-divider>
 
 </md-list>

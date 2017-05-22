@@ -28,7 +28,7 @@ export class ClimbService implements OnInit {
 
   private fbClimbs: FirebaseListObservable<any>;
   public climbs: Observable<Climb[]>;
-  constructor(db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase) {
     // the map here apply to one object which is a list
     this.fbClimbs = db.list('/climbs', {
       query: {
@@ -41,6 +41,10 @@ export class ClimbService implements OnInit {
 
   addClimb(climb: Climb) {
     return this.fbClimbs.push(Climb.toJSON(climb));
+  }
+
+  markClimbAsCompletedByUser(userId: string, climbId: string){
+    this.db.object(`/climbCompletions/${userId}/${climbId}`).set(true);
   }
 
   ngOnInit() {

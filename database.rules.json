@@ -4,9 +4,12 @@
       ".read": true,
       ".write": "auth !== null"
     },
-    "items": {
-      ".read": true,
-      ".write": "auth !== null"
+    "climbCompletions": {
+      ".read": false,
+      ".write": false,
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      }
     }
   }
 }
