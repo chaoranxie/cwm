@@ -1,11 +1,23 @@
 <md-list>
 
   <h3 md-subheader>Available Routes</h3>
+
+  <div *ngIf="routes | async; let routes; else loading">
+
   <app-route
     [route]="route"
-    *ngFor="let route of routes | async"
+    *ngFor="let route of routes"
     (selectedRoute)="markRouteAsCompleted($event)"
   ></app-route>
   <md-divider></md-divider>
+
+</div>
+  <ng-template #loading>Loading Route Data...
+    <md-progress-spinner
+        mode="indeterminate">
+    </md-progress-spinner>
+  </ng-template>
+
+
 
 </md-list>
