@@ -42,5 +42,8 @@ export class Climb {
     public setDate: Date,
     public note: string,
     public key?: string,
-  ) {}
+    public hasCompleted?: boolean,
+  ) {
+    this.hasCompleted = hasCompleted || false;
+  }
 }

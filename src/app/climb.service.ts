@@ -1,11 +1,19 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/combineLatest';
+// import 'rxjs/add/operator/forEach';
+
+
+
 import { Climb } from './climb';
+import { UserService } from './user.service';
 
 @Injectable()
 export class ClimbService implements OnInit {
@@ -28,15 +36,77 @@ export class ClimbService implements OnInit {
 
   private fbClimbs: FirebaseListObservable<any>;
   public climbs: Observable<Climb[]>;
-  constructor(private db: AngularFireDatabase) {
+  public fbClimbCompletions: FirebaseObjectObservable<any>;
+
+
+  public completions: Observable<any[]>;
+  private _completions: BehaviorSubject<any[]> =    new BehaviorSubject<any[]>([]);
+
+
+  constructor(
+    private db: AngularFireDatabase,
+    public userService: UserService,
+  ) {
+
+
     // the map here apply to one object which is a list
     this.fbClimbs = db.list('/climbs', {
       query: {
         orderByChild: 'level',
       }
     });
-    this.climbs = this.fbClimbs.map(Climb.fromJsonList);
-    // debugger
+
+    // This is updated in the combineLatest
+    // this.climbs = this.fbClimbs.map(Climb.fromJsonList);
+
+    // FIXME: cant just hardcode the user name
+    // this.fbClimbCompletions = db.object(`/climbCompletions/noone/`);
+    this.fbClimbCompletions = db.object(`/climbCompletions/1wfIVwiRErQdiJSe1gcH5oHHz0p2/`);
+
+    // this.userService.user.subscribe(currentUser => {
+    //   // debugger;
+    //   // if (currentUser!==null) {
+    //   console.log(currentUser.uid);
+    //     this.fbClimbCompletions = db.object(`/climbCompletions/${currentUser.uid}/`);
+    //   // }
+    // });
+
+    // It seems like fbClimbCompletions is only filed once, i really should be using a behavior here
+    // so that it can be fired more than once.
+    this.climbs = this.fbClimbs.combineLatest(this.fbClimbCompletions, (fbClimbs, fbCompletions) => {
+      const finalClimbs: Climb[] = [];
+      fbClimbs.forEach(climbJson => {
+        const myClimb: Climb = Climb.fromJSON(climbJson);
+        myClimb.hasCompleted = fbCompletions[climbJson.$key] || false;
+        finalClimbs.push(myClimb);
+      })
+      debugger;
+      return finalClimbs;
+    });
+
+    // this.fbClimbCompletions.subscribe(completionList => {
+    //   this._completions.next(completionList);
+    // })
+    // this.completions.subscribe(console.log);
+    // this.completions = Observable.combineLatest(
+    //   this.climbs,
+    //   this.fbClimbCompletions
+    // ).map(
+    //   ([
+    //     climbs, completions
+    //   ]) => {
+    //     debugger;
+    //     return climbs;
+    //   }
+    // )
+    //
+    // this.completions.subscribe(() => {
+    //
+    //   debugger;
+    // })
+
+
+
   }
 
   addClimb(climb: Climb) {

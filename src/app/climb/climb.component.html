@@ -5,6 +5,7 @@
 
     <div md-line><b>Level:</b> 5.{{climb.level}}  <b>Station:</b> {{climb.station}} </div>
     <div md-line><b>Setter:</b> {{climb.setter}}  <b>Set date:</b> {{climb.setDate}}</div>
+    <div md-line><b>hasCompleted:</b> {{climb.hasCompleted}}</div>
 
     <!-- <p [ngStyle]="{'color': climb.color}">Color {{climb.color}} </p> -->
     <!-- <p> {{climb.note}} </p> -->
@@ -15,8 +16,20 @@
     <!-- <md-icon md-font-library="material-icons" >done</md-icon> -->
     <!-- <md-icon>favorite_border</md-icon> -->
 
-    <button (click)="selectClimb(climb)"><md-icon>check_box_outline_blank</md-icon></button>
 
+    <div *ngIf="climb.hasCompleted; else elseBlock">
+      <button><md-icon>check_box</md-icon></button>
+    </div>
+
+    <ng-template #elseBlock>
+      <button (click)="selectClimb(climb)"><md-icon>check_box_outline_blank</md-icon></button>
+    </ng-template>
+
+
+
+
+
+    <!-- <md-icon>check_box</md-icon>
 
     <!-- <md-icon>check_box</md-icon>
     <md-icon>star</md-icon>
