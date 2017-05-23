@@ -18,11 +18,18 @@
 
 
     <div *ngIf="climb.hasCompleted; else elseBlock">
-      <button><md-icon>check_box</md-icon></button>
+      <!-- <button><md-icon>check_box</md-icon></button> -->
+
+      <md-checkbox [checked]="true" ></md-checkbox>
+
     </div>
 
     <ng-template #elseBlock>
-      <button (click)="selectClimb(climb)"><md-icon>check_box_outline_blank</md-icon></button>
+
+      <!-- [checked]="checked" -->
+      <md-checkbox  (click)="selectClimb(climb)"></md-checkbox>
+
+      <!-- <button (click)="selectClimb(climb)"><md-icon>check_box_outline_blank</md-icon></button> -->
     </ng-template>
 
 
