@@ -1,7 +1,7 @@
 <md-list-item>
   <md-icon md-list-icon [ngStyle]="{'background-color': route.color, 'fill': route.color, 'color': route.color}">brightness_1</md-icon>
   <div md-line><b>Grade:</b> 5.{{route.grade}} <b>Station:</b> {{route.station}} </div>
-  <div md-line><b>Setter:</b> {{route.setter | uppercase}} <b>Set date:</b> {{route.setDate}}</div>
+  <div md-line><b>Setter:</b> {{route.setter | uppercase}} <b>Set date:</b> {{route.setDate | date:'shortDate'}}</div>
 
   <div *ngIf="route.hasCompleted; else elseBlock">
     <md-checkbox [checked]="true" [disabled]="true"></md-checkbox>

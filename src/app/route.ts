@@ -21,7 +21,7 @@ export class Route {
       color: route.color,
       station: route.station,
       setter: route.setter,
-      setDate: route.setDate,
+      setDate: route.setDate.toJSON(),
       type: route.type,
     }
   }

@@ -66,7 +66,7 @@ export class AppComponent {
   }
 
   addRoute(station, grade, color, setter, setDate, type) {
-    const route: Route = new Route (station, color, grade, setter, setDate, type);
+    const route: Route = new Route (Number(station), color, Number(grade), setter, new Date(setDate), type, '');
     this.routeService.addRoute(route);
   }
 
