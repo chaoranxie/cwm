@@ -8,7 +8,8 @@
       ".read": false,
       ".write": false,
       "$uid": {
-        ".write": "$uid === auth.uid"
+        ".write": "$uid === auth.uid",
+        ".read": "$uid === auth.uid"
       }
     }
   }
