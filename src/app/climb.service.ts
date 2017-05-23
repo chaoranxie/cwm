@@ -36,7 +36,10 @@ export class ClimbService implements OnInit {
 
   private fbClimbs: FirebaseListObservable<any>;
   public climbs: Observable<Climb[]>;
-  public fbClimbCompletions: FirebaseObjectObservable<any>;
+  // public fbClimbCompletions: FirebaseObjectObservable<any>;
+
+  public fbClimbCompletions: BehaviorSubject<any> =
+    new BehaviorSubject<any>({});
 
 
   public completions: Observable<any[]>;
@@ -61,15 +64,25 @@ export class ClimbService implements OnInit {
 
     // FIXME: cant just hardcode the user name
     // this.fbClimbCompletions = db.object(`/climbCompletions/noone/`);
-    this.fbClimbCompletions = db.object(`/climbCompletions/1wfIVwiRErQdiJSe1gcH5oHHz0p2/`);
+    // this.fbClimbCompletions = db.object(`/climbCompletions/1wfIVwiRErQdiJSe1gcH5oHHz0p2/`);
 
+    //  public fbClimbCompletions: FirebaseObjectObservable<any>;
     // this.userService.user.subscribe(currentUser => {
     //   // debugger;
-    //   // if (currentUser!==null) {
-    //   console.log(currentUser.uid);
+    //   if (currentUser!==null) {
+    //   console.log(currentUser);
     //     this.fbClimbCompletions = db.object(`/climbCompletions/${currentUser.uid}/`);
-    //   // }
+    //   }
     // });
+    this.userService.user.subscribe(currentUser => {
+      // debugger;
+      if (currentUser!==null) {
+      console.log(currentUser);
+        db.object(`/climbCompletions/${currentUser.uid}/`).subscribe(obj=> {
+          this.fbClimbCompletions.next(obj);
+        });
+      }
+    });
 
     // It seems like fbClimbCompletions is only filed once, i really should be using a behavior here
     // so that it can be fired more than once.
