@@ -10,18 +10,18 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { ClimbListComponent } from './climb-list/climb-list.component';
-import { ClimbService } from './climb.service';
+import { RouteListComponent } from './route-list/route-list.component';
+import { RouteService } from './route.service';
 import { UserService } from './user.service';
 
 import 'hammerjs';
-import { ClimbComponent } from './climb/climb.component';
+import { RouteComponent } from './route/route.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClimbListComponent,
-    ClimbComponent
+    RouteListComponent,
+    RouteComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +35,7 @@ import { ClimbComponent } from './climb/climb.component';
     AngularFireAuthModule // imports firebase/auth, only needed for auth features
   ],
   providers: [
-    ClimbService,
+    RouteService,
     UserService
   ],
   bootstrap: [AppComponent]

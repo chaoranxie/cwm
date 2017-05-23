@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ClimbService } from './climb.service';
+import { RouteService } from './route.service';
 import { UserService } from './user.service';
 
-import { Climb } from './climb';
+import { Route } from './route';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { Climb } from './climb';
 })
 export class AppComponent {
 
-  levels = [
+  grades = [
     {value: 4, viewValue: '5.4'},
     {value: 5, viewValue: '5.5'},
     {value: 6, viewValue: '5.6'},
@@ -28,43 +28,40 @@ export class AppComponent {
   ];
 
   colors = [
-    {value: 'red', viewValue: 'red'},
-    {value: 'white', viewValue: 'white'},
-    {value: 'blue', viewValue: 'blue'},
-    {value: 'orange', viewValue: 'orange'},
-    {value: 'yellow', viewValue: 'yellow'},
-    {value: 'purple', viewValue: 'purple'},
-    {value: 'black', viewValue: 'black'},
-    {value: 'other', viewValue: 'other'}
-
+    {value: 'black', viewValue: 'Black'},
+    {value: 'blue', viewValue: 'Blue'},
+    {value: 'green', viewValue: 'Green'},
+    {value: 'orange', viewValue: 'Orange'},
+    {value: 'purple', viewValue: 'Purple'},
+    {value: 'red', viewValue: 'Red'},
+    {value: 'white', viewValue: 'White'},
+    {value: 'yellow', viewValue: 'Yellow'},
+    {value: 'other', viewValue: 'Other'}
   ];
 
   setters = [
-    {value: 'EK', viewValue: 'EK'},
-    {value: 'LY', viewValue: 'LY'},
-    {value: 'other', viewValue: 'other'}
+    {value: 'ek', viewValue: 'EY'},
+    {value: 'jw', viewValue: 'JW'},
+    {value: 'ks', viewValue: 'KS'},
+    {value: 'ly', viewValue: 'LY'},
+    {value: 'ps', viewValue: 'PS'},
+    {value: 'rw', viewValue: 'RW'},
+    {value: 'sm', viewValue: 'SM'},
+    {value: 'tex', viewValue: 'TEX'},
+    {value: 'zgy', viewValue: 'ZGY'},
+    {value: 'other', viewValue: 'OTHER'}
   ];
 
   constructor(
-    private climbService: ClimbService,
+    private routeService: RouteService,
     public userService: UserService,
   ) {
+
   }
 
-  isLoggedIn(): boolean {
-    // Fixme: This is not good, there should be a better way
-    // this.userService.user | async
-
-    return this.userService.afAuth.auth.currentUser !== null;
-  }
-
-  addClimb(station, level, color, setter, setDate, climbStyle) {
-// , level, setter, setDate, note
-    // debugger
-  // addClimb(station, color, level, setter, setDate, note) {
-    // 76, 'red', 5.9, 'setter', new Date(), 'no note entered'
-    const climb: Climb = new Climb (station, color, level, setter, setDate, climbStyle);
-    this.climbService.addClimb(climb);
+  addRoute(station, grade, color, setter, setDate, type) {
+    const route: Route = new Route (station, color, grade, setter, setDate, type);
+    this.routeService.addRoute(route);
   }
 
   loginGoogle() {

@@ -1,14 +1,8 @@
-<app-climb-list> </app-climb-list>
-<!-- <div *ngIf="isLoggedIn(); else elseBlock"> -->
 <div *ngIf="userService.user | async; else elseBlock">
 
-
-<div>
-
-
-<md-select placeholder="Level" [(ngModel)]="level" name="level">
-  <md-option *ngFor="let level of levels" [value]="level.value">
-    {{level.viewValue}}
+<md-select placeholder="Grade" [(ngModel)]="grade" name="grade">
+  <md-option *ngFor="let grade of grades" [value]="grade.value">
+    {{grade.viewValue}}
   </md-option>
 </md-select>
 <md-select placeholder="Color" [(ngModel)]="color" name="color">
@@ -18,45 +12,36 @@
 </md-select>
 
 <md-input-container><input mdInput #station type='number' placeholder="Station"></md-input-container>
-<!-- <md-select placeholder="Level" [(ngModel)]="selectedLevel" name="level"> -->
+
 <div>
-  <md-select placeholder="Setter" [(ngModel)]="setter" name="setter">
-    <md-option *ngFor="let setter of setters" [value]="setter.value">
-      {{setter.viewValue}}
-    </md-option>
-  </md-select>
-  <md-input-container>
-    <input mdInput #setDateValue [mdDatepicker]="setDate" placeholder="Set date">
-    <button mdSuffix [mdDatepickerToggle]="setDate"></button>
-  </md-input-container>
-  <md-datepicker #setDate></md-datepicker>
+<md-select placeholder="Setter" [(ngModel)]="setter" name="setter">
+  <md-option *ngFor="let setter of setters" [value]="setter.value">
+    {{setter.viewValue}}
+  </md-option>
+</md-select>
+<md-input-container>
+  <input mdInput #setDateValue [mdDatepicker]="setDate" placeholder="Set date">
+  <button mdSuffix [mdDatepickerToggle]="setDate"></button>
+</md-input-container>
+<md-datepicker #setDate></md-datepicker>
 </div>
 
 <div>
-  <md-radio-group class="example-radio-group" [(ngModel)]="climbStyle">
-    <md-radio-button value="toprope">Top Rope Only</md-radio-button>
-    <md-radio-button value="leadclimb">Lead Climb</md-radio-button>
-    <md-radio-button value="both">Both</md-radio-button>
-  </md-radio-group>
+<md-radio-group [(ngModel)]="type">
+  <md-radio-button value="toprope">Top Rope Only</md-radio-button>
+  <md-radio-button value="leadclimb">Lead Climb</md-radio-button>
+  <md-radio-button value="both">Both</md-radio-button>
+</md-radio-group>
 </div>
 
-
-<!--
-
-
-
-
-
+<button (click)="addRoute(station.value, grade, color, setter, setDateValue.value, type)" md-raised-button>Add New Route</button>
 
 <div>
-
-</div> -->
-
-<button (click)="addClimb(station.value, level, color, setter, setDateValue.value, climbStyle)" md-raised-button>Add Climb</button>
-
-</div>
   <button (click)="logout()" md-raised-button>logout</button>
 </div>
+
+</div>
 <ng-template #elseBlock>
-  <button (click)="loginGoogle()" md-raised-button>login via Google</button>
+  <button (click)="loginGoogle()" md-raised-button>Login via Google</button>
 </ng-template>
+<app-route-list> </app-route-list>

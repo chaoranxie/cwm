@@ -1,0 +1,11 @@
+<md-list>
+
+  <h3 md-subheader>Available Routes</h3>
+  <app-route
+    [route]="route"
+    *ngFor="let route of routes | async"
+    (selectedRoute)="markRouteAsCompleted($event)"
+  ></app-route>
+  <md-divider></md-divider>
+
+</md-list>

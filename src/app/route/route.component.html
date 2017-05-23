@@ -1,0 +1,14 @@
+<md-list-item>
+  <md-icon md-list-icon [ngStyle]="{'background-color': route.color, 'fill': route.color, 'color': route.color}">brightness_1</md-icon>
+  <div md-line><b>Level:</b> 5.{{route.level}} <b>Station:</b> {{route.station}} </div>
+  <div md-line><b>Setter:</b> {{route.setter}} <b>Set date:</b> {{route.setDate}}</div>
+  <div md-line><b>hasCompleted:</b> {{route.hasCompleted}}</div>
+
+  <div *ngIf="route.hasCompleted; else elseBlock">
+    <md-checkbox [checked]="true" [disabled]="true"></md-checkbox>
+  </div>
+
+  <ng-template #elseBlock>
+    <md-checkbox (click)="selectClimb(route)"></md-checkbox>
+  </ng-template>
+</md-list-item>

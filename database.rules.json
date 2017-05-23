@@ -1,10 +1,10 @@
 {
   "rules": {
-    "climbs": {
+    "routes": {
       ".read": true,
       ".write": "auth !== null"
     },
-    "climbCompletions": {
+    "routeCompletions": {
       ".read": false,
       ".write": false,
       "$uid": {
