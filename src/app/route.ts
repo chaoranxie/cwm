@@ -40,6 +40,7 @@ export class Route {
     public setter: string,
     public setDate: Date,
     public type: string,
+    public additionalInfo: string,
     public key?: string,
     public hasCompleted?: boolean,
   ) {
