@@ -39,17 +39,23 @@ export class AppComponent {
     {value: 'other', viewValue: 'Other'}
   ];
 
+  types = [
+    {value: 'top_rope', viewValue: 'Top Rope Only'},
+    {value: 'lead', viewValue: 'Lead Climb Only'},
+    {value: 'both', viewValue: 'Both'},
+  ];
+
   setters = [
-    {value: 'ek', viewValue: 'EY'},
-    {value: 'jw', viewValue: 'JW'},
-    {value: 'ks', viewValue: 'KS'},
-    {value: 'ly', viewValue: 'LY'},
-    {value: 'ps', viewValue: 'PS'},
-    {value: 'rw', viewValue: 'RW'},
-    {value: 'sm', viewValue: 'SM'},
-    {value: 'tex', viewValue: 'TEX'},
-    {value: 'zgy', viewValue: 'ZGY'},
-    {value: 'other', viewValue: 'OTHER'}
+    'ek',
+    'jw',
+    'ks',
+    'ly',
+    'ps',
+    'rw',
+    'sm',
+    'tex',
+    'zgy',
+    'other',
   ];
 
   constructor(

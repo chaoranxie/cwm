@@ -1,47 +1,47 @@
 <div *ngIf="userService.user | async; else elseBlock">
 
-<md-select placeholder="Grade" [(ngModel)]="grade" name="grade">
+
+<md-select required placeholder="Grade" [(ngModel)]="grade" name="grade">
   <md-option *ngFor="let grade of grades" [value]="grade.value">
     {{grade.viewValue}}
   </md-option>
 </md-select>
-<md-select placeholder="Color" [(ngModel)]="color" name="color">
+<md-select required placeholder="Color" [(ngModel)]="color" name="color">
   <md-option [ngStyle]="{'background-color': color.value}" *ngFor="let color of colors" [value]="color.value">
     {{color.viewValue}}
   </md-option>
 </md-select>
 
-<md-input-container><input mdInput #station type='number' placeholder="Station"></md-input-container>
+<md-input-container><input required mdInput #station type='number' placeholder="Station"></md-input-container>
 
 <div>
-<md-select placeholder="Setter" [(ngModel)]="setter" name="setter">
-  <md-option *ngFor="let setter of setters" [value]="setter.value">
-    {{setter.viewValue}}
+<md-select required placeholder="Setter" [(ngModel)]="setter" name="setter">
+  <md-option *ngFor="let setter of setters" [value]="setter">
+    {{setter | uppercase}}
   </md-option>
 </md-select>
+
 <md-input-container>
-  <input mdInput #setDateValue [mdDatepicker]="setDate" placeholder="Set date">
+  <input required mdInput #setDateValue [mdDatepicker]="setDate" placeholder="Set date">
   <button mdSuffix [mdDatepickerToggle]="setDate"></button>
 </md-input-container>
 <md-datepicker #setDate></md-datepicker>
 </div>
 
 <div>
-<md-radio-group [(ngModel)]="type">
-  <md-radio-button value="toprope">Top Rope Only</md-radio-button>
-  <md-radio-button value="leadclimb">Lead Climb</md-radio-button>
-  <md-radio-button value="both">Both</md-radio-button>
+  <div>Type:</div>
+<md-radio-group required [(ngModel)]="type">
+  <md-radio-button *ngFor="let type of types" [value]="type.value">
+    {{type.viewValue}}
+  </md-radio-button>
 </md-radio-group>
 </div>
 
-<button (click)="addRoute(station.value, grade, color, setter, setDateValue.value, type)" md-raised-button>Add New Route</button>
-
-<div>
-  <button (click)="logout()" md-raised-button>logout</button>
-</div>
+<button color="primary" (click)="addRoute(station.value, grade, color, setter, setDateValue.value, type)" md-raised-button>Add New Route</button>
+<button color="accent" (click)="logout()" md-raised-button>Logout</button>
 
 </div>
 <ng-template #elseBlock>
-  <button (click)="loginGoogle()" md-raised-button>Login via Google</button>
+  <button color="primary" (click)="loginGoogle()" md-raised-button>Login via Google</button>
 </ng-template>
 <app-route-list> </app-route-list>

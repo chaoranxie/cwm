@@ -17,14 +17,7 @@ export class RouteService implements OnInit {
 
   private fbRoutes: FirebaseListObservable<any>;
   public routes: Observable<Route[]>;
-
-  public fbRouteCompletions: BehaviorSubject<any> =
-    new BehaviorSubject<any>({});
-
-
-  public completions: Observable<any[]>;
-  private _completions: BehaviorSubject<any[]> =    new BehaviorSubject<any[]>([]);
-
+  public fbRouteCompletions: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   constructor(
     private db: AngularFireDatabase,
@@ -56,7 +49,6 @@ export class RouteService implements OnInit {
       })
       return finalRoutes;
     });
-
 
   }
 
