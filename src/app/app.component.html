@@ -1,6 +1,4 @@
 <div *ngIf="userService.user | async; else elseBlock">
-
-
 <md-select required placeholder="Grade" [(ngModel)]="grade" name="grade">
   <md-option *ngFor="let grade of grades" [value]="grade.value">
     {{grade.viewValue}}

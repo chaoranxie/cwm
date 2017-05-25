@@ -33,9 +33,9 @@ export class RouteService implements OnInit {
     });
 
     this.userService.user.subscribe(currentUser => {
-      if (currentUser!==null) {
+      if (currentUser !== null) {
       console.log(currentUser);
-        db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj=> {
+        db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.fbRouteCompletions.next(obj);
         });
       }
@@ -58,7 +58,7 @@ export class RouteService implements OnInit {
     return this.fbRoutes.push(Route.toJSON(route));
   }
 
-  markRouteAsCompletedByUser(userId: string, routeId: string){
+  markRouteAsCompletedByUser(userId: string, routeId: string) {
     this.db.object(`/routeCompletions/${userId}/${routeId}`).set(true);
   }
 

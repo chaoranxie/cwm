@@ -10,6 +10,11 @@ import { Route } from './route';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  grade: number;
+  setter: string;
+  setDate: string;
+  color: string;
+  type: string;
 
   grades = [
     {value: 4, viewValue: '5.4'},

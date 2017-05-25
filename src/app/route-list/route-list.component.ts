@@ -22,7 +22,7 @@ export class RouteListComponent implements OnInit {
     this.routes = routeService.routes;
   }
 
-  markRouteAsCompleted(message: string){
+  markRouteAsCompleted(message: string) {
     this.routeService.markRouteAsCompletedByUser(this.userService.afAuth.auth.currentUser.uid, message)
   }
 
