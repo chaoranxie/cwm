@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouteService } from './route.service';
 import { UserService } from './user.service';
+import { Angulartics2GoogleAnalytics } from 'angulartics2';
+import { Location } from '@angular/common';
 
 import { Route } from './route';
 
@@ -64,6 +66,7 @@ export class AppComponent {
   ];
 
   constructor(
+    // public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private routeService: RouteService,
     public userService: UserService,
   ) {

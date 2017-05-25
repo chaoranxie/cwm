@@ -4,6 +4,9 @@ import { MaterialModule, MdNativeDateModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Location } from '@angular/common';
+
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -30,11 +33,14 @@ import { RouteComponent } from './route/route.component';
     MdNativeDateModule,
     FormsModule,
     HttpModule,
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule // imports firebase/auth, only needed for auth features
   ],
   providers: [
+    // Location,
+    // LocationStrategy,
     RouteService,
     UserService
   ],
