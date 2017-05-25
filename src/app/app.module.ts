@@ -5,6 +5,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Location } from '@angular/common';
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
 
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
@@ -20,6 +24,16 @@ import { UserService } from './user.service';
 import 'hammerjs';
 import { RouteComponent } from './route/route.component';
 
+
+
+const routes: Routes = [
+  // basic routes
+  { path: '', redirectTo: 'route-list', pathMatch: 'full' },
+  { path: 'route-list', component: RouteListComponent },
+];
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +47,8 @@ import { RouteComponent } from './route/route.component';
     MdNativeDateModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(routes), // <-- routes
+
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features

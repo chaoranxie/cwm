@@ -1,54 +1,94 @@
-<div *ngIf="userService.user | async; else elseBlock">
-<md-select required placeholder="Grade" [(ngModel)]="grade" name="grade">
-  <md-option *ngFor="let grade of grades" [value]="grade.value">
-    {{grade.viewValue}}
-  </md-option>
-</md-select>
-<md-select required placeholder="Color" [(ngModel)]="color" name="color">
-  <md-option [ngStyle]="{'background-color': color.value}" *ngFor="let color of colors" [value]="color.value">
-    {{color.viewValue}}
-  </md-option>
-</md-select>
 
-<md-input-container><input required mdInput #station type='number' placeholder="Station"></md-input-container>
+<md-sidenav-container class="example-container">
+  <md-sidenav #sidenav class="example-sidenav">
+    <div class="container">
+      <h1>Climb with Me</h1>
+      <div class="navLinks">
+        <a [routerLink]="['/route-list']">Home</a>
+        <a [routerLink]="['/route-list']">About Us</a>
+        <a [routerLink]="['/route-list']">Contact Us</a>
+      </div>
+    </div>
+  </md-sidenav>
 
-<div>
-<md-select required placeholder="Setter" [(ngModel)]="setter" name="setter">
-  <md-option *ngFor="let setter of setters" [value]="setter">
-    {{setter | uppercase}}
-  </md-option>
-</md-select>
 
-<md-input-container>
-  <input required mdInput #setDateValue [mdDatepicker]="setDate" placeholder="Set date">
-  <button mdSuffix [mdDatepickerToggle]="setDate"></button>
-</md-input-container>
-<md-datepicker #setDate></md-datepicker>
-</div>
+  <!-- <button md-button (click)="sidenav.open()">
+    Open sidenav
+  </button> -->
 
-<div>
-  <div>Type:</div>
-<md-radio-group required [(ngModel)]="type">
-  <md-radio-button *ngFor="let type of types" [value]="type.value">
-    {{type.viewValue}}
-  </md-radio-button>
-</md-radio-group>
-</div>
 
-<button color="primary" (click)="addRoute(station.value, grade, color, setter, setDateValue.value, type)" md-raised-button>Add New Route</button>
-<button color="accent" (click)="logout()" md-raised-button>Logout</button>
 
-</div>
-<ng-template #elseBlock>
-  <button color="primary" (click)="loginGoogle()" md-raised-button>Login via Google</button>
+
+  <md-toolbar>Climb with Me   <button md-button (click)="sidenav.open()"><md-icon md-list-icon>menu</md-icon>  </button>
+  </md-toolbar>
+
+
+
+  <div *ngIf="userService.user | async; else elseBlock">
+  <md-select required placeholder="Grade" [(ngModel)]="grade" name="grade">
+    <md-option *ngFor="let grade of grades" [value]="grade.value">
+      {{grade.viewValue}}
+    </md-option>
+  </md-select>
+  <md-select required placeholder="Color" [(ngModel)]="color" name="color">
+    <md-option [ngStyle]="{'background-color': color.value}" *ngFor="let color of colors" [value]="color.value">
+      {{color.viewValue}}
+    </md-option>
+  </md-select>
+
+  <md-input-container><input required mdInput #station type='number' placeholder="Station"></md-input-container>
+
+  <div>
+  <md-select required placeholder="Setter" [(ngModel)]="setter" name="setter">
+    <md-option *ngFor="let setter of setters" [value]="setter">
+      {{setter | uppercase}}
+    </md-option>
+  </md-select>
+
+  <md-input-container>
+    <input required mdInput #setDateValue [mdDatepicker]="setDate" placeholder="Set date">
+    <button mdSuffix [mdDatepickerToggle]="setDate"></button>
+  </md-input-container>
+  <md-datepicker #setDate></md-datepicker>
+  </div>
+
+  <div>
+    <div>Type:</div>
+  <md-radio-group required [(ngModel)]="type">
+    <md-radio-button *ngFor="let type of types" [value]="type.value">
+      {{type.viewValue}}
+    </md-radio-button>
+  </md-radio-group>
+  </div>
+
+  <button color="primary" (click)="addRoute(station.value, grade, color, setter, setDateValue.value, type)" md-raised-button>Add New Route</button>
+  <button color="accent" (click)="logout()" md-raised-button>Logout</button>
+
+  </div>
+  <ng-template #elseBlock>
+    <!-- <button color="primary" (click)="loginGoogle()" md-raised-button>Login via Google</button> -->
+    <button angulartics2On="click"
+            angularticsEvent="LoginEvent"
+            angularticsCategory="LoginCategory"
+            [angularticsProperties]="{label: 'Main Login'}"
+            color="primary"
+            (click)="loginGoogle()"
+            md-raised-button>Login via Google</button>
+
+  </ng-template>
+
+  <router-outlet></router-outlet>
+
+</md-sidenav-container>
+
+
 <!--
-  <button angulartics2On="click"
-          angularticsEvent="LoginEvent"
-          angularticsCategory="LoginCategory"
-          [angularticsProperties]="{label: 'Main Login'}"
-          color="primary"
-          (click)="loginGoogle()"
-          md-raised-button>Login via Google</button>
-           -->
-</ng-template>
-<app-route-list> </app-route-list>
+<div class="page-header">
+
+</div> -->
+
+<!-- <div id="content">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div> -->

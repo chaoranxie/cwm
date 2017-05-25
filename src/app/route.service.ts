@@ -27,8 +27,8 @@ export class RouteService implements OnInit {
     this.fbRoutes = db.list('/routes', {
       query: {
         orderByChild: 'grade',
-        startAt: 5,
-        endAt: 8,
+        startAt: 4,
+        endAt: 11,
       }
     });
 

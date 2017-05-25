@@ -66,11 +66,11 @@ export class AppComponent {
   ];
 
   constructor(
-    // public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private routeService: RouteService,
     public userService: UserService,
   ) {
-
+    // debugger;
   }
 
   addRoute(station, grade, color, setter, setDate, type) {
