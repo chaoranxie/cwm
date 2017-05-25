@@ -2,7 +2,7 @@
 @import "https://fonts.googleapis.com/css?family=Material+Icons";
 /*This is the same as the above one*/
 /*@import '~https://fonts.googleapis.com/icon?family=Material+Icons';*/
-/*@import "https://fonts.googleapis.com/css?family=Roboto:400,300";*/
+@import "https://fonts.googleapis.com/css?family=Roboto:400,300";
 /*@import '~@angular/material/prebuilt-themes/purple-green.css';*/
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
