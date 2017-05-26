@@ -71,7 +71,6 @@ export class AppComponent {
     private routeService: RouteService,
     public userService: UserService,
   ) {
-    debugger;
     this.angulartics2.eventTrack.next({ action: 'myAction', properties: { category: 'myCategory' }});
 
   }
