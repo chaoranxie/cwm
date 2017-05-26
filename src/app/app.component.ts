@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouteService } from './route.service';
 import { UserService } from './user.service';
-import { Angulartics2GoogleAnalytics } from 'angulartics2';
+import { Angulartics2 } from 'angulartics2';
+
 import { Location } from '@angular/common';
 
 import { Route } from './route';
@@ -66,11 +67,13 @@ export class AppComponent {
   ];
 
   constructor(
-    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    public angulartics2: Angulartics2,
     private routeService: RouteService,
     public userService: UserService,
   ) {
-    // debugger;
+    debugger;
+    this.angulartics2.eventTrack.next({ action: 'myAction', properties: { category: 'myCategory' }});
+
   }
 
   addRoute(station, grade, color, setter, setDate, type) {
