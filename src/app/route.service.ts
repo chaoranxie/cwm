@@ -34,10 +34,11 @@ export class RouteService implements OnInit {
 
     this.userService.user.subscribe(currentUser => {
       if (currentUser !== null) {
-      console.log(currentUser);
         db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.fbRouteCompletions.next(obj);
         });
+      } else {
+        this.fbRouteCompletions.next({});
       }
     });
 
