@@ -1,9 +1,11 @@
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+
+import { Component, Input, OnInit, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Route } from '../route';
 
 @Component({
   selector: 'app-route',
   templateUrl: './route.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RouteComponent implements OnInit {
   @Input() route: Route;
