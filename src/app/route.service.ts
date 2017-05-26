@@ -12,7 +12,7 @@ import 'rxjs/add/operator/combineLatest';
 import { Route } from './route';
 import { UserService } from './user.service';
 
-const defaultRoutes = JSON.parse(localStorage.getItem("routes222")) || [];
+const defaultRoutes = JSON.parse(localStorage.getItem("routes")) || [];
 
 
 @Injectable()
@@ -38,12 +38,10 @@ export class RouteService implements OnInit {
     });
 
     this.fbRoutes.subscribe(routes => {
-      debugger;
       this.routesBS.next(routes);
     })
 
     this.userService.user.subscribe(currentUser => {
-      debugger;
       if (currentUser !== null) {
         db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.routeCompletionsBS.next(obj);
@@ -55,7 +53,10 @@ export class RouteService implements OnInit {
 
 
     this.routes = this.routesBS.combineLatest(this.routeCompletionsBS, (routes, completions) => {
-      debugger;
+      // Save the data if the routes are from firebase server
+      if (routes.length >0 && routes[0].$key !== undefined) {
+        localStorage.setItem("routes", JSON.stringify(routes));
+      }
       const finalRoutes: Route[] = [];
       routes.forEach(routeJson => {
         const myRoute: Route = Route.fromJSON(routeJson);
