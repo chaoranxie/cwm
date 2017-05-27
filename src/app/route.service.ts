@@ -35,8 +35,8 @@ export class RouteService implements OnInit {
     this.fbRoutes = db.list('/routes', {
       query: {
         orderByChild: 'grade',
-        startAt: 4,
-        endAt: 11,
+        startAt: 6,
+        endAt: 8,
       }
     });
 
@@ -46,6 +46,7 @@ export class RouteService implements OnInit {
 
     this.userService.user.subscribe(currentUser => {
       if (currentUser !== null) {
+
         this.completionSubscription = db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.routeCompletionsBS.next(obj);
         });
