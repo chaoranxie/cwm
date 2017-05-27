@@ -1,5 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
+import {Observable, Subscription} from 'rxjs/Rx';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { environment } from '../environments/environment';
@@ -20,6 +22,7 @@ export class RouteService implements OnInit {
 
   private fbRoutes: FirebaseListObservable<any>;
   public routes: Observable<Route[]>;
+  private completionSubscription: Subscription;
 
   public routesBS: BehaviorSubject<any> = new BehaviorSubject<any>(defaultRoutes);
   public routeCompletionsBS: BehaviorSubject<any> = new BehaviorSubject<any>({});
@@ -43,10 +46,13 @@ export class RouteService implements OnInit {
 
     this.userService.user.subscribe(currentUser => {
       if (currentUser !== null) {
-        db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
+        this.completionSubscription = db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.routeCompletionsBS.next(obj);
         });
       } else {
+        if (this.completionSubscription){
+            this.completionSubscription.unsubscribe()
+        }
         this.routeCompletionsBS.next({});
       }
     });
