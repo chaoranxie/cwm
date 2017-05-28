@@ -14,14 +14,13 @@ import 'rxjs/add/operator/combineLatest';
 import { Route } from './route';
 import { UserService } from './user.service';
 
-const defaultRoutes = JSON.parse(localStorage.getItem("routes")) || [];
+const defaultRoutes = JSON.parse(localStorage.getItem("routes2")) || [];
 
 
 @Injectable()
 export class RouteService implements OnInit {
 
   private fbRoutes: FirebaseListObservable<any>;
-  public routes: Observable<Route[]>;
   private completionSubscription: Subscription;
 
   public routesBS: BehaviorSubject<any> = new BehaviorSubject<any>(defaultRoutes);
@@ -35,8 +34,8 @@ export class RouteService implements OnInit {
     this.fbRoutes = db.list('/routes', {
       query: {
         orderByChild: 'grade',
-        startAt: 6,
-        endAt: 8,
+        startAt: 4,
+        endAt: 16,
       }
     });
 
@@ -46,7 +45,6 @@ export class RouteService implements OnInit {
 
     this.userService.user.subscribe(currentUser => {
       if (currentUser !== null) {
-
         this.completionSubscription = db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.routeCompletionsBS.next(obj);
         });
@@ -59,19 +57,6 @@ export class RouteService implements OnInit {
     });
 
 
-    this.routes = this.routesBS.combineLatest(this.routeCompletionsBS, (routes, completions) => {
-      // Save the data if the routes are from firebase server
-      if (routes.length >0 && routes[0].$key !== undefined) {
-        localStorage.setItem("routes", JSON.stringify(routes));
-      }
-      const finalRoutes: Route[] = [];
-      routes.forEach(routeJson => {
-        const myRoute: Route = Route.fromJSON(routeJson);
-        myRoute.hasCompleted = completions[routeJson.$key] || false;
-        finalRoutes.push(myRoute);
-      })
-      return finalRoutes;
-    });
 
   }
 

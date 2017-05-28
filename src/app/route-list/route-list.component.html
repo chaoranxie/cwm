@@ -4,7 +4,7 @@
 
   <h3 md-subheader>Available Routes</h3>
 
-  <div *ngIf="routes | async; let routes; else loading">
+  <div *ngIf="routeList; let routes; else loading">
 
   <app-route
     [route]="route"
