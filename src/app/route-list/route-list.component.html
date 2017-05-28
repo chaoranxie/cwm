@@ -4,12 +4,12 @@
 
   <h3 md-subheader>Available Routes</h3>
 
-  <div *ngIf="routes | async; let routes; else loading">
+  <div *ngIf="routes; else loading">
 
   <app-route
     [route]="route"
-    *ngFor="let route of routes"
-    (selectedRoute)="markRouteAsCompleted($event)"
+    *ngFor="let route of routes; let i = index"
+    (selectedRoute)="markRouteAsCompleted(i)"
   ></app-route>
   <md-divider></md-divider>
 

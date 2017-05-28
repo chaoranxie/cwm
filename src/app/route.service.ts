@@ -21,7 +21,9 @@ const defaultRoutes = JSON.parse(localStorage.getItem("routes")) || [];
 export class RouteService implements OnInit {
 
   private fbRoutes: FirebaseListObservable<any>;
-  public routes: Observable<Route[]>;
+  // public routes: Observable<Route[]>;
+  public routes: Route[] = [];
+
   private completionSubscription: Subscription;
 
   public routesBS: BehaviorSubject<any> = new BehaviorSubject<any>(defaultRoutes);
@@ -59,19 +61,36 @@ export class RouteService implements OnInit {
     });
 
 
-    this.routes = this.routesBS.combineLatest(this.routeCompletionsBS, (routes, completions) => {
-      // Save the data if the routes are from firebase server
-      if (routes.length >0 && routes[0].$key !== undefined) {
-        localStorage.setItem("routes", JSON.stringify(routes));
+    this.routesBS.combineLatest(this.routeCompletionsBS, (routesFB, completionsFB) => {
+      // debugger;
+      if (this.routes.length == 0){
+        // debugger;
+        routesFB.forEach(routeJson => {
+          const myRoute: Route = Route.fromJSON(routeJson);
+          myRoute.hasCompleted = completionsFB[routeJson.$key] || false;
+
+          this.routes.push(myRoute);
+        })
+      } else {
+        // debugger;
+        // this.routes[0].hasCompleted = !!this.routes[0].hasCompleted;
       }
-      const finalRoutes: Route[] = [];
-      routes.forEach(routeJson => {
-        const myRoute: Route = Route.fromJSON(routeJson);
-        myRoute.hasCompleted = completions[routeJson.$key] || false;
-        finalRoutes.push(myRoute);
-      })
-      return finalRoutes;
+
+
+
+
+    }).subscribe(routes => {
+
+      // debugger;
     });
+    //
+    // // Update
+    // // Questions:
+    // How do i store data so it can be accessed easily
+    // // TODO: experiment with
+
+    // TODO:
+    // Ravi mentioned just keep 2 observables and then the component itself will check if one exists
 
   }
 
