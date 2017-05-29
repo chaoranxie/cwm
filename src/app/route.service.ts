@@ -35,7 +35,7 @@ export class RouteService implements OnInit {
       query: {
         orderByChild: 'grade',
         startAt: 4,
-        endAt: 16,
+        endAt: 5,
       }
     });
 

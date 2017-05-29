@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { RouteService } from '../route.service';
@@ -11,6 +11,8 @@ import { Route } from '../route';
 @Component({
   selector: 'app-route-list',
   templateUrl: './route-list.component.html',
+  // changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
   public routeList: Route[];
@@ -30,9 +32,15 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     routeService.routeCompletionsBS.subscribe(completions=>{
-      this.routeList.forEach(route=> {
-        debugger;
-        route.hasCompleted = completions[route.key] === undefined ? false : true;
+      this.routeList.forEach((route, index, routes)=> {
+        // debugger;
+        const newValue = completions[route.key] === undefined ? false : true;
+        if (newValue != route.hasCompleted){
+          debugger;
+          console.log(route.station);
+          route.hasCompleted = newValue;
+          //routes[index] = Object.assign(Object.create(Route.prototype), route, {hasCompleted:newValue});
+        }
       })
     })
   }

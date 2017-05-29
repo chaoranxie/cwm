@@ -7,7 +7,14 @@ import { OnDestroy, OnChanges } from '@angular/core';
 @Component({
   selector: 'app-route',
   templateUrl: './route.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+
+  // It seems like this will only trigger change if the object for the input changed,
+  // for example, if i do something like
+  // routes[index] = Object.assign(Object.create(Route.prototype), route, {hasCompleted:newValue});
+  // but if i just change value like           route.hasCompleted = newValue;
+  // the UI will not change (oddly enough it did, WHY? )
+
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RouteComponent implements OnInit, OnChanges, OnDestroy {
   @Input() route: Route;

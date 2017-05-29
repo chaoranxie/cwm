@@ -7,6 +7,7 @@ interface RouteJSON {
   setDate: Date;
   type: string;
   additionalInfo: string;
+  hasCompleted?: boolean
 }
 
 export class Route {
@@ -27,9 +28,15 @@ export class Route {
   }
 
   static fromJSON(json: RouteJSON): Route {
+    debugger;
+    // Note this is different from new Route()
+    // in this case the constructor is actuall not run
+    // test: Route=new Route(...{station:1});
     const route = Object.create(Route.prototype);
     return Object.assign(route, json, {
-      key: json.$key ? json.$key : null
+      key: json.$key ? json.$key : null,
+      hasCompleted: json.hasCompleted ? json.hasCompleted : false,
+      setDate: new Date(json.setDate),
     });
   }
 
