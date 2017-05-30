@@ -41,6 +41,9 @@ export class RouteService implements OnInit {
     })
 
     this.userService.user.subscribe(currentUser => {
+
+      // debugger;
+
       if (currentUser !== null) {
         this.completionSubscription = db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.routeCompletionsBS.next(obj);

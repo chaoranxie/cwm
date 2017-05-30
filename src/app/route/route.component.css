@@ -8,7 +8,7 @@ md-card-content>:first-child, md-card>:first-child{
 md-card {
   margin: 15px;
 }
-/*.route-card {
-  width: 80%;
-  min-width: 300px;
-}*/
+.route-card {
+  /*width: 100%;*/
+  /*min-width: 300px;*/
+}
