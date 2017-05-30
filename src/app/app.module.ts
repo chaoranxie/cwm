@@ -33,7 +33,7 @@ import { RouteAddUpdateComponent } from './route/route-add-update.component';
 
 const routes: Routes = [
   // basic routes
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/route/list', pathMatch: 'full' },
   {
     path: 'route/add',
     component: RouteAddUpdateComponent

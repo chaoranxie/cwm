@@ -24,7 +24,6 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
 
     routeService.routesBS.subscribe( routes => {
       this.routeList = [];
-      debugger;
       routes.forEach(routeJson => {
         const myRoute: Route = Route.fromJSON(routeJson);
         this.routeList.push(myRoute);
