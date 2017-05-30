@@ -1,53 +1,50 @@
-
 <md-sidenav-container>
-  <md-sidenav #sidenav class="sidenav">
-    <md-nav-list>
-      <a md-list-item (click)="sidenav.close()" [routerLink]="['/']">
-        <md-icon md-list-icon>Home</md-icon>
-        <span md-line>Home</span>
-        <span md-line class="secondary">Home</span>
-      </a>
-      <a md-list-item (click)="sidenav.close()" [routerLink]="['/route/list']">
-        <md-icon md-list-icon>list</md-icon>
-        <span md-line>Routes</span>
-        <span md-line class="secondary">Routes</span>
-      </a>
+<md-sidenav #sidenav class="sidenav">
+  <md-nav-list>
 
-      <a md-list-item (click)="sidenav.close()" [routerLink]="['/route/add']">
-        <md-icon md-list-icon>list</md-icon>
-        <span md-line>Add Route</span>
-        <span md-line class="secondary">Add Route</span>
-      </a>
+    <a md-list-item (click)="sidenav.close()" [routerLink]="['/']">
+      <md-icon md-list-icon>Home</md-icon>
+      <span md-line>Home</span>
+      <span md-line class="secondary">Home</span>
+    </a>
 
-      <a *ngIf="userService.user | async" md-list-item (click)="sidenav.close(); logout()" class="logout-button">
-              <md-icon md-list-icon>account_circle</md-icon>
-              <span md-line>{{(userService.user | async)?.displayName}}</span>
-              <span md-line class="secondary">Logout</span>
-            </a>
-      <a *ngIf="!(userService.user | async)" md-list-item (click)="sidenav.close(); loginGoogle()()" class="login-button">
-        <md-icon md-list-icon>mood_bad</md-icon>
-        <span md-line>Login</span>
-        <span md-line class="secondary">Login</span>
-      </a>
+    <a md-list-item (click)="sidenav.close()" [routerLink]="['/route/list']">
+      <md-icon md-list-icon>list</md-icon>
+      <span md-line>Routes</span>
+      <span md-line class="secondary">Routes</span>
+    </a>
 
+    <a md-list-item (click)="sidenav.close()" [routerLink]="['/route/add']">
+      <md-icon md-list-icon>list</md-icon>
+      <span md-line>Add Route</span>
+      <span md-line class="secondary">Add Route</span>
+    </a>
 
-    </md-nav-list>
-  </md-sidenav>
+    <a *ngIf="userService.user | async" md-list-item (click)="sidenav.close(); logout()" class="logout-button">
+      <md-icon md-list-icon>account_circle</md-icon>
+      <span md-line>{{(userService.user | async)?.displayName}}</span>
+      <span md-line class="secondary">Logout</span>
+    </a>
 
+    <a *ngIf="!(userService.user | async)" md-list-item (click)="sidenav.close(); loginGoogle()()" class="login-button">
+      <md-icon md-list-icon>mood_bad</md-icon>
+      <span md-line>Login</span>
+      <span md-line class="secondary">Login</span>
+    </a>
+  </md-nav-list>
+</md-sidenav>
 
+<div class="my-content">
+    <md-toolbar color="primary">
+      <button md-icon-button (click)="sidenav.open()">
+        <md-icon>menu</md-icon>
+      </button>
+      <span>Climb with Me</span>
+      <span class="fill-remaining-space"></span>
+      <span *ngIf="userService.user | async" md-line >{{(userService.user | async)?.displayName}}</span>
+    </md-toolbar>
 
-
-
-  <div class="my-content">
-      <md-toolbar color="primary">
-        <button md-icon-button (click)="sidenav.open()">
-          <md-icon>menu</md-icon>
-        </button>
-        <span>Climb with Me</span>
-        <span class="fill-remaining-space"></span>
-        <span *ngIf="userService.user | async" md-line >{{(userService.user | async)?.displayName}}</span>
-      </md-toolbar>
-
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
+
 </md-sidenav-container>
