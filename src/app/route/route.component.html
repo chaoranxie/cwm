@@ -15,10 +15,15 @@
        <md-card-subtitle><b>Setter:</b> {{route.setter | uppercase}} <b>Set date:</b> {{route.setDate | date:'shortDate'}}</md-card-subtitle>
      </md-card-header>
      <md-card-content>
+
+       <div *ngIf="route.hasCompleted">
+         You have completed this route!
+       </div>
+
      </md-card-content>
      <md-card-actions>
-       <button md-button>Attempt+1</button>
-       <button md-button>Climb+1</button>
+       <button md-button>ATTEMPT++</button>
+       <button (click)="selectRoute(route)" md-button>CLIMB++</button>
      </md-card-actions>
 
      <!-- <md-list-item>
