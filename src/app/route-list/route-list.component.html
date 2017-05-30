@@ -1,25 +1,25 @@
+<!-- <md-card> -->
+<!-- removed the outer md-card because  i dont want all these padding associated with it -->
+<md-card-title>Routes</md-card-title>
+<!-- <h3 md-subheader>All Available Routes</h3> -->
+  <md-card-content class="flex-container"
+          fxLayoutWrap="wrap"
+          fxLayout="row"
+          fxLayoutAlign="center" fxLayoutAlign.xs="start">
 
+    <div *ngIf="routeList; let routes; else loading">
+    <app-route
+      [route]="route"
+      *ngFor="let route of routes"
+      (selectedRoute)="markRouteAsCompleted($event)"
+    ></app-route>
+  </div>
 
-<md-list>
-
-  <h3 md-subheader>Available Routes</h3>
-
-  <div *ngIf="routeList; let routes; else loading">
-
-  <app-route
-    [route]="route"
-    *ngFor="let route of routes"
-    (selectedRoute)="markRouteAsCompleted($event)"
-  ></app-route>
-  <md-divider></md-divider>
-
-</div>
   <ng-template #loading>Loading Route Data...
     <md-progress-spinner
         mode="indeterminate">
     </md-progress-spinner>
   </ng-template>
 
-
-
-</md-list>
+</md-card-content>
+<!-- </md-card> -->

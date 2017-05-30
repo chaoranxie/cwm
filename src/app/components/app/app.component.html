@@ -1,28 +1,34 @@
 
-<md-sidenav-container class="example-container">
-  <md-sidenav #sidenav class="example-sidenav">
-    <div class="container">
-      <h1>Climb with Me</h1>
-      <div class="navLinks">
-        <a [routerLink]="['/route-list']">Home</a>
-        <a [routerLink]="['/route-list']">About Us</a>
-        <a [routerLink]="['/route-list']">Contact Us</a>
-      </div>
-    </div>
+<md-sidenav-container>
+  <md-sidenav #sidenav class="sidenav">
+    <md-nav-list>
+      <a md-list-item (click)="sidenav.close()" [routerLink]="['/']">
+        <md-icon md-list-icon>Home</md-icon>
+        <span md-line>Home</span>
+        <span md-line class="secondary">Home</span>
+      </a>
+      <a md-list-item (click)="sidenav.close()" [routerLink]="['/route-list']">
+        <md-icon md-list-icon>list</md-icon>
+        <span md-line>Routes</span>
+        <span md-line class="secondary">Routes</span>
+      </a>
+
+    </md-nav-list>
   </md-sidenav>
 
 
-  <!-- <button md-button (click)="sidenav.open()">
-    Open sidenav
-  </button> -->
 
 
 
-
-  <md-toolbar><md-icon (click)="sidenav.open()" md-list-icon>menu</md-icon>   Climb with Me
-  </md-toolbar>
-
-
+  <div class="my-content">
+      <md-toolbar [color]="primary">
+        <button md-icon-button (click)="sidenav.open()">
+          <md-icon>menu</md-icon>
+        </button>
+        <span>Climb with Me</span>
+        <span class="fill-remaining-space"></span>
+      </md-toolbar>
+<!--
 
   <div *ngIf="userService.user | async; else elseBlock">
   <md-select required placeholder="Grade" [(ngModel)]="grade" name="grade">
@@ -66,7 +72,7 @@
 
   </div>
   <ng-template #elseBlock>
-    <!-- <button color="primary" (click)="loginGoogle()" md-raised-button>Login via Google</button> -->
+    <button color="primary" (click)="loginGoogle()" md-raised-button>Login via Google</button>
     <button angulartics2On="click"
             angularticsEvent="LoginEvent"
             angularticsCategory="LoginCategory"
@@ -75,20 +81,8 @@
             (click)="loginGoogle()"
             md-raised-button>Login via Google</button>
 
-  </ng-template>
+  </ng-template> -->
 
   <router-outlet></router-outlet>
-
+</div>
 </md-sidenav-container>
-
-
-<!--
-<div class="page-header">
-
-</div> -->
-
-<!-- <div id="content">
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-</div> -->

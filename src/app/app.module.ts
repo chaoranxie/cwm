@@ -11,6 +11,7 @@ import {
 } from '@angular/router';
 
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -31,7 +32,7 @@ import { RouteComponent } from './route/route.component';
 
 const routes: Routes = [
   // basic routes
-  { path: '', redirectTo: 'route-list', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'route-list', component: RouteListComponent },
 ];
 
@@ -51,15 +52,14 @@ const routes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes), // <-- routes
-
+    FlexLayoutModule,
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule // imports firebase/auth, only needed for auth features
+
   ],
   providers: [
-    // Location,
-    // LocationStrategy,
     RouteService,
     UserService
   ],

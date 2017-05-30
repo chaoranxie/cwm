@@ -7,6 +7,8 @@ import { OnDestroy, OnChanges } from '@angular/core';
 @Component({
   selector: 'app-route',
   templateUrl: './route.component.html',
+  styleUrls: ['./route.component.css']
+
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RouteComponent implements OnInit, OnChanges, OnDestroy {

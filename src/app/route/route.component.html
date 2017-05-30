@@ -1,13 +1,37 @@
-<md-list-item>
-  <md-icon md-list-icon [ngStyle]="{'background-color': route.color, 'fill': route.color, 'color': route.color}">brightness_1</md-icon>
-  <div md-line><b>Grade:</b> 5.{{route.grade}} <b>Station:</b> {{route.station}} </div>
-  <div md-line><b>Setter:</b> {{route.setter | uppercase}} <b>Set date:</b> {{route.setDate | date:'shortDate'}}</div>
+<md-card class="flex-item route-card">
+    <!-- <md-card-header>
+      <md-card-title>
+        <b>Grade:</b> 5.{{route.grade}} <b>Station:</b> {{route.station}}
+      </md-card-title>
+      <md-card-subtitle>
+      </md-card-subtitle>
+    </md-card-header>
+     -->
 
-  <div *ngIf="route.hasCompleted; else elseBlock">
-    <md-checkbox [checked]="true" [disabled]="true"></md-checkbox>
-  </div>
+     <md-card-header>
+       <div md-card-avatar [ngStyle]="{'background-color': route.color, 'fill': route.color, 'color': route.color}">
+       </div>
+       <md-card-title><b>Grade:</b> 5.{{route.grade}} <b>Station:</b> {{route.station}} </md-card-title>
+       <md-card-subtitle><b>Setter:</b> {{route.setter | uppercase}} <b>Set date:</b> {{route.setDate | date:'shortDate'}}</md-card-subtitle>
+     </md-card-header>
+     <md-card-content>
+     </md-card-content>
+     <md-card-actions>
+       <button md-button>Attempt+1</button>
+       <button md-button>Climb+1</button>
+     </md-card-actions>
 
-  <ng-template #elseBlock>
-    <md-checkbox (click)="selectRoute(route)"></md-checkbox>
-  </ng-template>
-</md-list-item>
+     <!-- <md-list-item>
+       <md-icon md-list-icon [ngStyle]="{'background-color': route.color, 'fill': route.color, 'color': route.color}">brightness_1</md-icon>
+       <div md-line><b>Grade:</b> 5.{{route.grade}} <b>Station:</b> {{route.station}} </div>
+       <div md-line><b>Setter:</b> {{route.setter | uppercase}} <b>Set date:</b> {{route.setDate | date:'shortDate'}}</div>
+
+       <div *ngIf="route.hasCompleted; else elseBlock">
+         <md-checkbox [checked]="true" [disabled]="true"></md-checkbox>
+       </div>
+
+       <ng-template #elseBlock>
+         <md-checkbox (click)="selectRoute(route)"></md-checkbox>
+       </ng-template>
+     </md-list-item> -->
+</md-card>

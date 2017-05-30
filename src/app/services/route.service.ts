@@ -1,14 +1,11 @@
 import { Injectable, OnInit } from '@angular/core';
 // import { Observable } from 'rxjs/Observable';
 import {Observable, Subscription} from 'rxjs/Rx';
-
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { environment } from '../../environments/environment';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/combineLatest';
 
+import '../rxjs-extensions';
 
 
 import { Route } from '../model/route';
