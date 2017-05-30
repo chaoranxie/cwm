@@ -1,0 +1,61 @@
+<md-card>
+  <form class="route-form"
+        [formGroup]="routeForm"
+        (ngSubmit)="onSubmit()" novalidate>
+    <md-card-title>Add Route</md-card-title>
+    <!-- <md-card-header>
+      <md-card-title>
+        Title
+      </md-card-title>
+    </md-card-header> -->
+    <md-card-content>
+
+
+    <md-select placeholder="Grade" formControlName="grade" name="grade">
+      <md-option *ngFor="let grade of grades" [value]="grade.value">
+        {{grade.viewValue}}
+      </md-option>
+    </md-select>
+
+    <md-select required placeholder="Color" formControlName="color" name="color">
+    <md-option [ngStyle]="{'background-color': color.value}" *ngFor="let color of colors" [value]="color.value">
+      {{color.viewValue}}
+    </md-option>
+    </md-select>
+
+    <md-input-container>
+      <input required placeholder="Station" formControlName="station" name="station" mdInput type='number' >
+      <md-hint align="end" *ngIf="routeForm.controls.station.errors && !routeForm.controls.station.pristine" class="error">Station is required!</md-hint>
+    </md-input-container>
+
+    <div>
+    <md-select required placeholder="Setter" formControlName="setter" name="setter">
+      <md-option *ngFor="let setter of setters" [value]="setter">
+        {{setter | uppercase}}
+      </md-option>
+    </md-select>
+
+    <md-input-container>
+      <input required mdInput formControlName="setDate" [mdDatepicker]="setDate" placeholder="Set date">
+      <button mdSuffix [mdDatepickerToggle]="setDate"></button>
+    </md-input-container>
+    <md-datepicker #setDate></md-datepicker>
+    </div>
+
+    <div>
+    <div>Type:</div>
+    <md-radio-group required formControlName="type">
+      <md-radio-button *ngFor="let type of types" [value]="type.value">
+        {{type.viewValue}}
+      </md-radio-button>
+    </md-radio-group>
+
+    </div>
+
+    </md-card-content>
+    <md-card-actions>
+      <button md-button color="primary" type="submit" [disabled]="!routeForm.valid">SAVE</button>
+      <button md-button>CANCEL</button>
+    </md-card-actions>
+  </form>
+</md-card>

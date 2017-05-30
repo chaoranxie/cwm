@@ -1,0 +1,6 @@
+/deep/md-input-container.ng-invalid.ng-touched .md-input-underline {
+  border-color: red;
+}
+/deep/md-hint.error {
+  color: red;
+}

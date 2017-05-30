@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule, MdNativeDateModule } from '@angular/material';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Location } from '@angular/common';
 import {
@@ -27,13 +27,18 @@ import { UserService } from './services/user.service';
 
 import 'hammerjs';
 import { RouteComponent } from './route/route.component';
+import { RouteAddUpdateComponent } from './route/route-add-update.component';
 
 
 
 const routes: Routes = [
   // basic routes
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'route-list', component: RouteListComponent },
+  {
+    path: 'route/add',
+    component: RouteAddUpdateComponent
+  },
+  { path: 'route/list', component: RouteListComponent },
 ];
 
 
@@ -42,7 +47,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     RouteListComponent,
-    RouteComponent
+    RouteComponent,
+    RouteAddUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,7 @@ const routes: Routes = [
     MaterialModule,
     MdNativeDateModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(routes), // <-- routes
     FlexLayoutModule,

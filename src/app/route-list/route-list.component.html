@@ -2,6 +2,10 @@
 <!-- removed the outer md-card because  i dont want all these padding associated with it -->
 <md-card-title>Routes</md-card-title>
 <!-- <h3 md-subheader>All Available Routes</h3> -->
+<button md-fab class="page-action" [routerLink]="['/route/add']">
+  <md-icon class="md-24">add</md-icon>
+</button>
+
   <md-card-content class="flex-container"
           fxLayoutWrap="wrap"
           fxLayout="row"
