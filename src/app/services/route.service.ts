@@ -4,15 +4,15 @@ import {Observable, Subscription} from 'rxjs/Rx';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/combineLatest';
 
 
 
-import { Route } from './route';
-import { UserService } from './user.service';
+import { Route } from '../model/route';
+import { UserService } from '../services/user.service';
 
 const defaultRoutes = JSON.parse(localStorage.getItem("routes2")) || [];
 

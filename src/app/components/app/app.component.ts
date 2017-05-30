@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouteService } from './route.service';
-import { UserService } from './user.service';
+import { RouteService } from '../../services/route.service';
+import { UserService } from '../../services/user.service';
 import { Angulartics2 } from 'angulartics2';
 
 import { Location } from '@angular/common';
 
-import { Route } from './route';
+import { Route } from '../../model/route';
 
 @Component({
   selector: 'app-root',

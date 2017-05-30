@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { RouteService } from '../route.service';
-import { UserService } from '../user.service';
+import { RouteService } from '../services/route.service';
+import { UserService } from '../services/user.service';
 
 
-import { Route } from '../route';
+import { Route } from '../model/route';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
 
     routeService.routeCompletionsBS.subscribe(completions=>{
       this.routeList.forEach(route=> {
-        debugger;
+        // debugger;
         route.hasCompleted = completions[route.key] === undefined ? false : true;
       })
     })

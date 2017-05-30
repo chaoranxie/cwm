@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { Route } from '../route';
+import { Route } from '../model/route';
 import { OnDestroy, OnChanges } from '@angular/core';
 
 

@@ -16,10 +16,13 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-import { AppComponent } from './app.component';
+
+import { AppComponent } from './components';
+
+
 import { RouteListComponent } from './route-list/route-list.component';
-import { RouteService } from './route.service';
-import { UserService } from './user.service';
+import { RouteService } from './services/route.service';
+import { UserService } from './services/user.service';
 
 import 'hammerjs';
 import { RouteComponent } from './route/route.component';
