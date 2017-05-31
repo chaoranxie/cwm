@@ -15,7 +15,6 @@ import { Route } from '../model';
   selector: 'app-route-list',
   templateUrl: './route-list.component.html',
   styleUrls: ['./route-list.component.css']
-
 })
 export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -39,7 +38,7 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
       // For now let this handle only new ones
       completions.forEach(routeCompletion => {
         // debugger;
-        this.store.dispatch(this.routeActions.completeRouteSuccess(routeCompletion.$key));
+        //this.store.dispatch(this.routeActions.completeRouteSuccess(routeCompletion.$key));
       })
     })
   }
@@ -51,10 +50,8 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     console.log('Route-list ngOnInit');
     this.sub = this.routesObs.subscribe(routes => {
-      // debugger;
       this.routes = routes;
     });
-
   }
 
   ngOnDestroy() {

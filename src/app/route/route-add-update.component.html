@@ -55,7 +55,7 @@
     </md-card-content>
     <md-card-actions>
       <button md-button color="primary" type="submit" [disabled]="!routeForm.valid">SAVE</button>
-      <button md-button>CANCEL</button>
+      <button md-button [routerLink]="['/route/list']" >CANCEL</button>
     </md-card-actions>
   </form>
 </md-card>
