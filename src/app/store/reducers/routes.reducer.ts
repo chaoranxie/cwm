@@ -10,6 +10,7 @@ export const routes = (state: any = [], action: Action): Route[] => {
     case RouteActions.LOAD_ROUTES_SUCCESS:
       return action.payload;
     case RouteActions.ADD_ROUTE_SUCCESS:
+      debugger;
       return [...state, ...action.payload];
     case RouteActions.COMPLETE_ROUTE_SUCCESS:
         debugger;
@@ -32,16 +33,16 @@ function completeRouteInStore(originalState: any=[], routeKey: string){
   return originalState;
 }
 
-export const routeSaveStatus = (state: any = "NONE", action: Action): string => {
-  switch (action.type) {
-    case RouteActions.ADD_ROUTE:
-      return "IN PROGRESS";
-    case RouteActions.ADD_ROUTE_SUCCESS:
-      return "SUCCESS";
-    default:
-      return state;
-  }
-};
+// export const routeSaveStatus = (state: any = "NONE", action: Action): string => {
+//   switch (action.type) {
+//     case RouteActions.ADD_ROUTE:
+//       return "IN PROGRESS";
+//     case RouteActions.ADD_ROUTE_SUCCESS:
+//       return "SUCCESS";
+//     default:
+//       return state;
+//   }
+// };
 
 // export const routeCompleteStatus = (state: any = "NONE", action: Action): string => {
 //   switch (action.type) {

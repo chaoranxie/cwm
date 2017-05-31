@@ -57,19 +57,31 @@ export class RouteService implements OnInit {
   }
 
   addRoute(route: Route) {
-    return this.fbRoutes.push(Route.toJSON(route));
+
+    debugger;
+    this.fbRoutes.push(Route.toJSON(route)).then(
+      (ret) => {
+      debugger;
+      route.key = ret.$key;
+      this.store.dispatch(this.routeActions.addRouteSuccess(route));
+      },
+      (error: Error) => {//error
+        console.error(error);
+      }
+    );
   }
 
   completeRoute(routeKey: string) {
     debugger;
     const userId = this.userService.afAuth.auth.currentUser.uid;
-    return this.db.object(`/routeCompletions/${userId}/${routeKey}`).set(true).then((ret) => {
+    this.db.object(`/routeCompletions/${userId}/${routeKey}`).set(true).then(
+      (ret) => {
       debugger;
       this.store.dispatch(this.routeActions.completeRouteSuccess(routeKey));
-    },
-    (error: Error) => {//error
-      console.error(error);
-    }
+      },
+      (error: Error) => {//error
+        console.error(error);
+      }
     );
   }
 

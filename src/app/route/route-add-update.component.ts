@@ -3,14 +3,10 @@ import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormCon
 import { Route } from '../model/route';
 import { RouteService } from '../services/route.service';
 import { Router } from '@angular/router';
-
-
-
-function routeFormValidator(fg: FormGroup): {[key: string]: boolean} {
-  debugger;
-  return null;
-}
-
+import { Store } from '@ngrx/store';
+import { AppStore } from '../store/app-store';
+import { RouteActions } from '../store/actions';
+import {colors, setters, types, grades} from './route.options';
 
 @Component({
   selector: 'app-route-add-update',
@@ -24,117 +20,63 @@ export class RouteAddUpdateComponent implements OnInit {
   setDate: string;
   color: string;
   type: string;
-
-  grades = [
-    {value: 4, viewValue: '5.4'},
-    {value: 5, viewValue: '5.5'},
-    {value: 6, viewValue: '5.6'},
-    {value: 7, viewValue: '5.7'},
-    {value: 8, viewValue: '5.8'},
-    {value: 9, viewValue: '5.9'},
-    {value: 10, viewValue: '5.10'},
-    {value: 11, viewValue: '5.11'},
-    {value: 12, viewValue: '5.12'},
-    {value: 13, viewValue: '5.13'},
-    {value: 14, viewValue: '5.14'},
-    {value: 15, viewValue: '5.15'},
-    {value: 16, viewValue: '5.16'}
-  ];
-
-  colors = [
-    {value: 'black', viewValue: 'Black'},
-    {value: 'blue', viewValue: 'Blue'},
-    {value: 'green', viewValue: 'Green'},
-    {value: 'orange', viewValue: 'Orange'},
-    {value: 'purple', viewValue: 'Purple'},
-    {value: 'red', viewValue: 'Red'},
-    {value: 'white', viewValue: 'White'},
-    {value: 'yellow', viewValue: 'Yellow'},
-    {value: 'other', viewValue: 'Other'}
-  ];
-
-  types = [
-    {value: 'top_rope', viewValue: 'Top Rope Only'},
-    {value: 'lead', viewValue: 'Lead Climb Only'},
-    {value: 'both', viewValue: 'Both'},
-  ];
-
-  setters = [
-    'ek',
-    'jw',
-    'ks',
-    'ly',
-    'ps',
-    'rw',
-    'sm',
-    'tex',
-    'zgy',
-    'other',
-  ];
-
   routeForm: FormGroup;
   route: Route;
+  colors: any[] = colors;
+  grades: any[] = grades;
+  setters: any[] = setters;
+  types: any[] = types;
 
-
-
-
-  constructor(private fb: FormBuilder,
-              private router: Router,
-
-              private routeService: RouteService) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private store: Store<AppStore>,
+    private routeActions: RouteActions,
+    private routeService: RouteService
+  ) { }
 
   ngOnInit() {
-    this.route = new Route(25, null, null, null, null,null,null);
+    this.route = new Route(null, null, null, null, null, null, null);
     this.createForm(this.route);
   }
   createForm(route: Route) {
-  this.routeForm = this.fb.group({
-    station: [route.station, Validators.required],
-    color: [route.color, Validators.required],
-    grade: [route.grade, Validators.required],
-    setter: [route.setter, Validators.required],
-    setDate: ['', Validators.required],
-    type: [route.type, Validators.required],
-  });
-  // }, {validator: routeFormValidator});
-}
+    this.routeForm = this.fb.group({
+      station: [route.station, Validators.required],
+      color: [route.color, Validators.required],
+      grade: [route.grade, Validators.required],
+      setter: [route.setter, Validators.required],
+      setDate: ['', Validators.required],
+      type: [route.type, Validators.required],
+    }, {validator: this.routeFormValidator});
+  }
 
-onSubmit() {
-    //validations
+  routeFormValidator(fg: FormGroup): { [key: string]: boolean } {
+    return null;
+  }
 
-    // debugger;
+  onSubmit() {
     if (this.routeForm.invalid)
       return;
-
     let route: Route = this.getRouteFromFormValue(this.routeForm.value);
     this.saveRoute(route);
   }
 
   getRouteFromFormValue(formValue: any): Route {
-    debugger;
     let route: Route;
     route = new Route(
       Number(formValue.station),
       formValue.color,
-      // null,
       Number(formValue.grade),
-      // null,
-      // null,
-      // null,
       formValue.setter,
       new Date(formValue.setDate),
       formValue.type,
       '');
-
     return route;
   }
 
   saveRoute(route: Route) {
-    this.routeService.addRoute(route).then(response => {
-      debugger;
-      this.router.navigate(['/route/list']);
-    });
+    this.store.dispatch(this.routeActions.addRoute(route));
+    this.router.navigate(['/route/list']);
   }
-
 
 }
