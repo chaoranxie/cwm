@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Effect, Actions} from '@ngrx/effects';
 
 import {AppStore} from '../app-store';
-import {Route} from '../../model';
+import {Route, RouteJSON} from '../../model';
 import {RouteActions} from '../actions';
 import {RouteService} from '../../services'
 
@@ -15,13 +15,21 @@ export class RouteEffects {
     ) {}
 
     @Effect()
-    loadQuestions$ = this.actions$
+    loadRoutes$ = this.actions$
         .ofType(RouteActions.LOAD_ROUTES)
         .switchMap(() => this.svc.getRoutes())
-        .map((routes: Route[]) => this.routeActions.loadRoutesSuccess(routes));
+        .map((routes: RouteJSON[]) => {
+            const routeList: Route[] = [];
+            routes.forEach(routeJson => {
+              const myRoute: Route = Route.fromJSON(routeJson);
+              routeList.push(myRoute);
+            })
+            return this.routeActions.loadRoutesSuccess(routeList)
+          }
+        );
 
     @Effect()
-    addQuestion$ = this.actions$
+    addRoute$ = this.actions$
         .ofType(RouteActions.ADD_ROUTE)
         .switchMap((action) => this.svc.saveRoute(action.payload))
         .map((route: Route) => this.routeActions.addRouteSuccess(route));

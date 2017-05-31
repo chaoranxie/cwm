@@ -17,7 +17,7 @@
           fxLayout="row"
           fxLayoutAlign="center" fxLayoutAlign.xs="start">
 
-    <div *ngIf="routeList; let routes; else loading">
+    <div *ngIf="routes; let routes; else loading">
     <app-route
       [route]="route"
       *ngFor="let route of routes"

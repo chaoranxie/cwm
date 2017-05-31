@@ -5,8 +5,11 @@ import { RouteService } from '../services/route.service';
 import { UserService } from '../services/user.service';
 
 
-import { Route } from '../model/route';
+import { Store } from '@ngrx/store';
+import { AppStore } from '../store/app-store';
+import { RouteActions } from '../store/actions';
 
+import { Route }     from '../model';
 
 @Component({
   selector: 'app-route-list',
@@ -15,24 +18,24 @@ import { Route } from '../model/route';
 
 })
 export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
-  public routeList: Route[];
+
+  routesObs: Observable<Route[]>;
+  routes: Route[] = [];
+  sub: any;
+
   constructor(
     private routeService: RouteService,
     public userService: UserService,
+    private store: Store<AppStore>,
+    private routeActions: RouteActions,
+
   ) {
 
-
-    routeService.routesBS.subscribe( routes => {
-      this.routeList = [];
-      routes.forEach(routeJson => {
-        const myRoute: Route = Route.fromJSON(routeJson);
-        this.routeList.push(myRoute);
-      })
-    });
+    this.routesObs = store.select(s => s.routes);
+    this.store.dispatch(this.routeActions.loadRoutes());
 
     routeService.routeCompletionsBS.subscribe(completions=>{
-      this.routeList.forEach(route=> {
-        // debugger;
+      this.routes.forEach(route=> {
         route.hasCompleted = completions[route.key] === undefined ? false : true;
       })
     })
@@ -44,12 +47,16 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     console.log("Route-list ngOnInit")
+    this.sub = this.routesObs.subscribe(routes => {
+      this.routes = routes;
+    }) ;
 
   }
 
   ngOnDestroy(){
     console.log("Route-list ngOnDestroy")
-
+    if (this.sub)
+      this.sub.unsubscribe();
   }
 
   ngOnChanges(){

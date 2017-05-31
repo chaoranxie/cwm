@@ -1,4 +1,4 @@
-interface RouteJSON {
+export interface RouteJSON {
   $key: string;
   station: number;
   color: string;

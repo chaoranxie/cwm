@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 import '../rxjs-extensions';
 
 
-import { Route } from '../model/route';
+import { Route, RouteJSON } from '../model';
 import { UserService } from '../services/user.service';
 
 const defaultRoutes = JSON.parse(localStorage.getItem("routes2")) || [];
@@ -68,7 +68,7 @@ export class RouteService implements OnInit {
   }
 
 
-  getRoutes(): Observable<Route[]> {
+  getRoutes(): Observable<RouteJSON[]> {
     return this.fbRoutes;
   }
 
