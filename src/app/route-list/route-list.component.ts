@@ -35,21 +35,27 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
     this.store.dispatch(this.routeActions.loadRoutes());
 
     routeService.routeCompletionsBS.subscribe(completions=>{
-      this.routes.forEach(route=> {
-        route.hasCompleted = completions[route.key] === undefined ? false : true;
-      })
+      debugger;
+      // For now let this handle only new ones
+      Object.keys(completions).forEach(routeCompletion=> {
+
+        debugger;
+       this.store.dispatch(this.routeActions.completeRouteSuccess(routeCompletion));
+     })
     })
   }
 
   markRouteAsCompleted(message: string) {
+    debugger;
     this.routeService.markRouteAsCompletedByUser(this.userService.afAuth.auth.currentUser.uid, message)
   }
 
   ngOnInit() {
     console.log("Route-list ngOnInit")
     this.sub = this.routesObs.subscribe(routes => {
+      debugger;
       this.routes = routes;
-    }) ;
+    });
 
   }
 

@@ -11,7 +11,6 @@ import '../rxjs-extensions';
 import { Route, RouteJSON } from '../model';
 import { UserService } from '../services/user.service';
 
-const defaultRoutes = JSON.parse(localStorage.getItem("routes2")) || [];
 
 
 @Injectable()
@@ -20,7 +19,6 @@ export class RouteService implements OnInit {
   private fbRoutes: FirebaseListObservable<any>;
   private completionSubscription: Subscription;
 
-  public routesBS: BehaviorSubject<any> = new BehaviorSubject<any>(defaultRoutes);
   public routeCompletionsBS: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   constructor(
@@ -36,12 +34,11 @@ export class RouteService implements OnInit {
       }
     });
 
-    this.fbRoutes.subscribe(routes => {
-      this.routesBS.next(routes);
-    })
+
 
     this.userService.user.subscribe(currentUser => {
       if (currentUser !== null) {
+        // could test using db.list( to get a list back
         this.completionSubscription = db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.routeCompletionsBS.next(obj);
         });
@@ -60,7 +57,11 @@ export class RouteService implements OnInit {
   }
 
   markRouteAsCompletedByUser(userId: string, routeId: string) {
-    this.db.object(`/routeCompletions/${userId}/${routeId}`).set(true);
+    this.db.object(`/routeCompletions/${userId}/${routeId}`).set(true)
+
+    // .then( ret => {
+    //   debugger;
+    // });
   }
 
   ngOnInit() {

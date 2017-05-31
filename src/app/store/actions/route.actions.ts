@@ -21,6 +21,7 @@ export class RouteActions {
     };
   }
 
+
   static ADD_ROUTE = 'ADD_ROUTE';
   addRoute(route: Route): Action {
     return {
@@ -45,13 +46,13 @@ export class RouteActions {
   //   };
   // }
   //
-  // static COMPLETE_ROUTE_SUCCESS = 'COMPLETE_ROUTE_SUCCESS';
-  // completeRouteSuccess(route: Route): Action {
-  //   return {
-  //     type: RouteActions.COMPLETE_ROUTE_SUCCESS,
-  //     payload: route
-  //   };
-  // }
+  static COMPLETE_ROUTE_SUCCESS = 'COMPLETE_ROUTE_SUCCESS';
+  completeRouteSuccess(routeKey: string): Action {
+    return {
+      type: RouteActions.COMPLETE_ROUTE_SUCCESS,
+      payload: routeKey
+    };
+  }
 
 
 }
