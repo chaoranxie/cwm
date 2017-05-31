@@ -1,17 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
-// import { Observable } from 'rxjs/Observable';
-import {Observable, Subscription} from 'rxjs/Rx';
+import { Observable, Subscription} from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { environment } from '../../environments/environment';
-
-import '../rxjs-extensions';
-
-
-import { Route, RouteJSON } from '../model';
-import { UserService } from '../services/user.service';
-
 import { Store } from '@ngrx/store';
+
+import { environment } from '../../environments/environment';
+import '../rxjs-extensions';
+import { Route } from '../model';
+import { UserService } from '../services/user.service';
 import { AppStore } from '../store/app-store';
 import { RouteActions } from '../store/actions';
 
@@ -38,8 +34,6 @@ export class RouteService implements OnInit {
       }
     });
 
-
-
     this.userService.user.subscribe(currentUser => {
       if (currentUser !== null) {
         // could test using db.list( to get a list back
@@ -47,64 +41,52 @@ export class RouteService implements OnInit {
           this.routeCompletionsBS.next(obj);
         });
       } else {
-        if (this.completionSubscription){
-            this.completionSubscription.unsubscribe()
+        if (this.completionSubscription) {
+          this.completionSubscription.unsubscribe()
         }
         this.routeCompletionsBS.next({});
       }
     });
-
   }
 
   addRoute(route: Route) {
-
-    debugger;
-    this.fbRoutes.push(Route.toJSON(route)).then(
+    this.fbRoutes.push(route).then(
       (ret) => {
-      debugger;
-      route.key = ret.$key;
-      this.store.dispatch(this.routeActions.addRouteSuccess(route));
+        route.$key = ret.key;
+        this.store.dispatch(this.routeActions.addRouteSuccess(route));
       },
-      (error: Error) => {//error
+      (error: Error) => {
         console.error(error);
       }
     );
   }
 
   completeRoute(routeKey: string) {
-    debugger;
     const userId = this.userService.afAuth.auth.currentUser.uid;
     this.db.object(`/routeCompletions/${userId}/${routeKey}`).set(true).then(
       (ret) => {
-      debugger;
-      this.store.dispatch(this.routeActions.completeRouteSuccess(routeKey));
+        this.store.dispatch(this.routeActions.completeRouteSuccess(routeKey));
       },
-      (error: Error) => {//error
+      (error: Error) => {
         console.error(error);
       }
     );
   }
 
-
   ngOnInit() {
 
   }
 
-
-  getRoutes(): Observable<RouteJSON[]> {
+  getRoutes(): Observable<Route[]> {
     return this.fbRoutes;
   }
 
   saveRoute(route: Route): Observable<Route> {
-    this.fbRoutes.push(Route.toJSON(route)).then(route => {
-      debugger;
+    this.fbRoutes.push(route).then(ret => {
+
     });
 
     return Observable.of(route)
   }
-
-
-
-
 
 }

@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '../store/app-store';
 import { RouteActions } from '../store/actions';
 
-import { Route }     from '../model';
+import { Route } from '../model';
 
 @Component({
   selector: 'app-route-list',
@@ -34,22 +34,22 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
     this.routesObs = store.select(s => s.routes);
     this.store.dispatch(this.routeActions.loadRoutes());
 
-    routeService.routeCompletionsBS.subscribe(completions=>{
+    routeService.routeCompletionsBS.subscribe(completions => {
       // debugger;
       // For now let this handle only new ones
-      completions.forEach(routeCompletion=> {
+      completions.forEach(routeCompletion => {
         // debugger;
-       this.store.dispatch(this.routeActions.completeRouteSuccess(routeCompletion.$key));
-     })
+        this.store.dispatch(this.routeActions.completeRouteSuccess(routeCompletion.$key));
+      })
     })
   }
 
-  markRouteAsCompleted(routeKey: string) {
-    this.store.dispatch(this.routeActions.completeRoute(routeKey))
+  markRouteAsCompleted(route: Route) {
+    this.store.dispatch(this.routeActions.completeRoute(route.$key))
   }
 
   ngOnInit() {
-    console.log("Route-list ngOnInit")
+    console.log('Route-list ngOnInit');
     this.sub = this.routesObs.subscribe(routes => {
       // debugger;
       this.routes = routes;
@@ -57,13 +57,14 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
 
   }
 
-  ngOnDestroy(){
-    console.log("Route-list ngOnDestroy")
-    if (this.sub)
+  ngOnDestroy() {
+    console.log('Route-list ngOnDestroy');
+    if (this.sub) {
       this.sub.unsubscribe();
+    }
   }
 
-  ngOnChanges(){
-      console.log("Route-list ngOnChanges")
+  ngOnChanges() {
+    console.log('Route-list ngOnChanges');
   }
 }

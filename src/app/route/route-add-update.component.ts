@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormArray, FormControl, ValidatorFn } from '@angular/forms';
-import { Route } from '../model/route';
-import { RouteService } from '../services/route.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+
+import { Route } from '../model/route';
 import { AppStore } from '../store/app-store';
 import { RouteActions } from '../store/actions';
-import {colors, setters, types, grades} from './route.options';
+
+import { colors, setters, types, grades } from './route.options';
 
 @Component({
   selector: 'app-route-add-update',
@@ -32,22 +33,27 @@ export class RouteAddUpdateComponent implements OnInit {
     private router: Router,
     private store: Store<AppStore>,
     private routeActions: RouteActions,
-    private routeService: RouteService
   ) { }
 
   ngOnInit() {
-    this.route = new Route(null, null, null, null, null, null, null);
+    this.route = new Route();
+    // this.route.station = 1;
+    // this.route.grade = 4;
+    // this.route.color ='blue';
+    // this.route.setter = 'other';
+    // this.route.type = 'both';
     this.createForm(this.route);
   }
+
   createForm(route: Route) {
     this.routeForm = this.fb.group({
       station: [route.station, Validators.required],
       color: [route.color, Validators.required],
       grade: [route.grade, Validators.required],
       setter: [route.setter, Validators.required],
-      setDate: ['', Validators.required],
+      setDate: [route.setDate, Validators.required],
       type: [route.type, Validators.required],
-    }, {validator: this.routeFormValidator});
+    }, { validator: this.routeFormValidator });
   }
 
   routeFormValidator(fg: FormGroup): { [key: string]: boolean } {
@@ -55,22 +61,21 @@ export class RouteAddUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.routeForm.invalid)
+    if (this.routeForm.invalid) {
       return;
-    let route: Route = this.getRouteFromFormValue(this.routeForm.value);
+    }
+    const route: Route = this.getRouteFromFormValue(this.routeForm.value);
     this.saveRoute(route);
   }
 
   getRouteFromFormValue(formValue: any): Route {
-    let route: Route;
-    route = new Route(
-      Number(formValue.station),
-      formValue.color,
-      Number(formValue.grade),
-      formValue.setter,
-      new Date(formValue.setDate),
-      formValue.type,
-      '');
+    const route: Route = new Route()
+    route.station = Number(formValue.station);
+    route.setter = formValue.setter;
+    route.color = formValue.color;
+    route.grade = Number(formValue.grade)
+    route.type = formValue.type;
+    route.setDate = formValue.setDate.toJSON();
     return route;
   }
 

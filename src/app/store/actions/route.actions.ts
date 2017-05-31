@@ -7,13 +7,18 @@ import {Route} from '../../model';
 export class RouteActions {
 
   static LOAD_ROUTES = 'LOAD_ROUTES';
+  static LOAD_ROUTES_SUCCESS = 'LOAD_ROUTES_SUCCESS';
+  static ADD_ROUTE = 'ADD_ROUTE';
+  static ADD_ROUTE_SUCCESS = 'ADD_ROUTE_SUCCESS';
+  static COMPLETE_ROUTE = 'COMPLETE_ROUTE';
+  static COMPLETE_ROUTE_SUCCESS = 'COMPLETE_ROUTE_SUCCESS';
+
   loadRoutes(): Action {
     return {
       type: RouteActions.LOAD_ROUTES
     };
   }
 
-  static LOAD_ROUTES_SUCCESS = 'LOAD_ROUTES_SUCCESS';
   loadRoutesSuccess(routes: Route[]): Action {
     return {
       type: RouteActions.LOAD_ROUTES_SUCCESS,
@@ -22,7 +27,6 @@ export class RouteActions {
   }
 
 
-  static ADD_ROUTE = 'ADD_ROUTE';
   addRoute(route: Route): Action {
     return {
       type: RouteActions.ADD_ROUTE,
@@ -30,7 +34,6 @@ export class RouteActions {
     };
   }
 
-  static ADD_ROUTE_SUCCESS = 'ADD_ROUTE_SUCCESS';
   addRouteSuccess(route: Route): Action {
     return {
       type: RouteActions.ADD_ROUTE_SUCCESS,
@@ -38,7 +41,6 @@ export class RouteActions {
     };
   }
 
-  static COMPLETE_ROUTE = 'COMPLETE_ROUTE';
   completeRoute(routeKey: string): Action {
     return {
       type: RouteActions.COMPLETE_ROUTE,
@@ -46,13 +48,11 @@ export class RouteActions {
     };
   }
 
-  static COMPLETE_ROUTE_SUCCESS = 'COMPLETE_ROUTE_SUCCESS';
   completeRouteSuccess(routeKey: string): Action {
     return {
       type: RouteActions.COMPLETE_ROUTE_SUCCESS,
       payload: routeKey
     };
   }
-
 
 }
