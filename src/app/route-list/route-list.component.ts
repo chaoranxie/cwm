@@ -37,10 +37,9 @@ export class RouteListComponent implements OnInit, OnChanges, OnDestroy {
     routeService.routeCompletionsBS.subscribe(completions=>{
       debugger;
       // For now let this handle only new ones
-      Object.keys(completions).forEach(routeCompletion=> {
-
+      completions.forEach(routeCompletion=> {
         debugger;
-       this.store.dispatch(this.routeActions.completeRouteSuccess(routeCompletion));
+       this.store.dispatch(this.routeActions.completeRouteSuccess(routeCompletion.$key));
      })
     })
   }

@@ -19,7 +19,7 @@ export class RouteService implements OnInit {
   private fbRoutes: FirebaseListObservable<any>;
   private completionSubscription: Subscription;
 
-  public routeCompletionsBS: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  public routeCompletionsBS: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(
     private db: AngularFireDatabase,
@@ -39,7 +39,7 @@ export class RouteService implements OnInit {
     this.userService.user.subscribe(currentUser => {
       if (currentUser !== null) {
         // could test using db.list( to get a list back
-        this.completionSubscription = db.object(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
+        this.completionSubscription = db.list(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
           this.routeCompletionsBS.next(obj);
         });
       } else {
