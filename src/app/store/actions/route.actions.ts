@@ -37,15 +37,15 @@ export class RouteActions {
       payload: route
     };
   }
-  //
-  // static COMPLETE_ROUTE = 'COMPLETE_ROUTE';
-  // completeRoute(route: Route): Action {
-  //   return {
-  //     type: RouteActions.COMPLETE_ROUTE,
-  //     payload: route
-  //   };
-  // }
-  //
+
+  static COMPLETE_ROUTE = 'COMPLETE_ROUTE';
+  completeRoute(routeKey: string): Action {
+    return {
+      type: RouteActions.COMPLETE_ROUTE,
+      payload: routeKey
+    };
+  }
+
   static COMPLETE_ROUTE_SUCCESS = 'COMPLETE_ROUTE_SUCCESS';
   completeRouteSuccess(routeKey: string): Action {
     return {

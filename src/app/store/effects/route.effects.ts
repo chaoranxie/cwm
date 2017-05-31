@@ -33,4 +33,14 @@ export class RouteEffects {
         .ofType(RouteActions.ADD_ROUTE)
         .switchMap((action) => this.svc.saveRoute(action.payload))
         .map((route: Route) => this.routeActions.addRouteSuccess(route));
+
+    @Effect()
+    completeRoute$ = this.actions$
+        .ofType(RouteActions.COMPLETE_ROUTE)
+        .do((action) => this.svc.completeRoute(action.payload))
+        .filter(() => false);
+
+        // Not sure why for completion route or saving question, it is different
+        // .switchMap((action) => this.svc.completeRoute(action.payload))
+        // .map((routeKey: string) => this.routeActions.completeRouteSuccess(routeKey));
 }

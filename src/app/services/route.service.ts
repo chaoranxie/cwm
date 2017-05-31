@@ -11,7 +11,9 @@ import '../rxjs-extensions';
 import { Route, RouteJSON } from '../model';
 import { UserService } from '../services/user.service';
 
-
+import { Store } from '@ngrx/store';
+import { AppStore } from '../store/app-store';
+import { RouteActions } from '../store/actions';
 
 @Injectable()
 export class RouteService implements OnInit {
@@ -24,6 +26,8 @@ export class RouteService implements OnInit {
   constructor(
     private db: AngularFireDatabase,
     public userService: UserService,
+    private store: Store<AppStore>,
+    private routeActions: RouteActions
   ) {
 
     this.fbRoutes = db.list('/routes', {
@@ -56,13 +60,19 @@ export class RouteService implements OnInit {
     return this.fbRoutes.push(Route.toJSON(route));
   }
 
-  markRouteAsCompletedByUser(userId: string, routeId: string) {
-    this.db.object(`/routeCompletions/${userId}/${routeId}`).set(true)
-
-    // .then( ret => {
-    //   debugger;
-    // });
+  completeRoute(routeKey: string) {
+    debugger;
+    const userId = this.userService.afAuth.auth.currentUser.uid;
+    return this.db.object(`/routeCompletions/${userId}/${routeKey}`).set(true).then((ret) => {
+      debugger;
+      this.store.dispatch(this.routeActions.completeRouteSuccess(routeKey));
+    },
+    (error: Error) => {//error
+      console.error(error);
+    }
+    );
   }
+
 
   ngOnInit() {
 
@@ -80,5 +90,9 @@ export class RouteService implements OnInit {
 
     return Observable.of(route)
   }
+
+
+
+
 
 }
