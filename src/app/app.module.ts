@@ -19,27 +19,30 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './components';
-
-
-import { RouteListComponent } from './route-list/route-list.component';
-import { RouteService } from './services/route.service';
-import { UserService } from './services/user.service';
-
-import 'hammerjs';
 import { RouteComponent } from './route/route.component';
 import { RouteAddUpdateComponent } from './route/route-add-update.component';
+import { RouteListComponent } from './route-list/route-list.component';
+
+import { UserService } from './services';
+
+import 'hammerjs';
 
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { default as reducer } from './store/app-store';
 
-const routes: Routes = [
-  // basic routes
-  { path: '', redirectTo: '/route/list', pathMatch: 'full' },
-  {
-    path: 'route/add',
-    component: RouteAddUpdateComponent
-  },
-  { path: 'route/list', component: RouteListComponent },
-];
+
+import { RouteService } from './services';
+
+import {RouteActions} from './store/actions';
+import {RouteEffects} from './store/effects';
+
+
+import { routes }   from './app.route';
+
+
 
 
 
@@ -59,6 +62,16 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(routes), // <-- routes
+
+    StoreModule.provideStore(reducer),
+
+       //ngrx effects
+    EffectsModule.run(RouteEffects),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 20
+    }),
+
+
     FlexLayoutModule,
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     AngularFireModule.initializeApp(environment.firebase),
@@ -68,7 +81,8 @@ const routes: Routes = [
   ],
   providers: [
     RouteService,
-    UserService
+    RouteActions,
+    UserService,
   ],
   bootstrap: [AppComponent]
 })
