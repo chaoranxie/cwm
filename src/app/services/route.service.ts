@@ -67,4 +67,17 @@ export class RouteService implements OnInit {
 
   }
 
+
+  getRoutes(): Observable<Route[]> {
+    return this.fbRoutes;
+  }
+
+  saveRoute(route: Route): Observable<Route> {
+    this.fbRoutes.push(Route.toJSON(route)).then(route => {
+      debugger;
+    });
+
+    return Observable.of(route)
+  }
+
 }
