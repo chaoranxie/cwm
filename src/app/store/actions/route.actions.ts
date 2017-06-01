@@ -10,8 +10,11 @@ export class RouteActions {
   static LOAD_ROUTES_SUCCESS = 'LOAD_ROUTES_SUCCESS';
   static ADD_ROUTE = 'ADD_ROUTE';
   static ADD_ROUTE_SUCCESS = 'ADD_ROUTE_SUCCESS';
-  static COMPLETE_ROUTE = 'COMPLETE_ROUTE';
-  static COMPLETE_ROUTE_SUCCESS = 'COMPLETE_ROUTE_SUCCESS';
+
+  static LOAD_COMPLETIONS = 'LOAD_COMPLETIONS';
+  static LOAD_COMPLETIONS_SUCCESS = 'LOAD_COMPLETIONS_SUCCESS';
+  static ADD_COMPLETION = 'ADD_COMPLETION';
+  static ADD_COMPLETION_SUCCESS = 'ADD_COMPLETION_SUCCESS';
 
   loadRoutes(): Action {
     return {
@@ -26,6 +29,32 @@ export class RouteActions {
     };
   }
 
+  loadCompletions(): Action {
+    return {
+      type: RouteActions.LOAD_COMPLETIONS
+    };
+  }
+
+  loadCompletionsSuccess(completions: any[]): Action {
+    return {
+      type: RouteActions.LOAD_COMPLETIONS_SUCCESS,
+      payload: completions
+    };
+  }
+
+  addCompletion(completion: string): Action {
+    return {
+      type: RouteActions.ADD_COMPLETION,
+      payload: completion
+    };
+  }
+
+  addCompletionSuccess(completion: string): Action {
+    return {
+      type: RouteActions.ADD_COMPLETION_SUCCESS,
+      payload: completion
+    };
+  }
 
   addRoute(route: Route): Action {
     return {
@@ -40,19 +69,4 @@ export class RouteActions {
       payload: route
     };
   }
-
-  completeRoute(routeKey: string): Action {
-    return {
-      type: RouteActions.COMPLETE_ROUTE,
-      payload: routeKey
-    };
-  }
-
-  completeRouteSuccess(routeKey: string): Action {
-    return {
-      type: RouteActions.COMPLETE_ROUTE_SUCCESS,
-      payload: routeKey
-    };
-  }
-
 }

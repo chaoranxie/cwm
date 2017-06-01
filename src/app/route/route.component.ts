@@ -8,10 +8,11 @@ import { Route } from '../model/route';
   selector: 'app-route',
   templateUrl: './route.component.html',
   styleUrls: ['./route.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RouteComponent implements OnInit, OnChanges, OnDestroy {
   @Input() route: Route;
+  @Input() hasCompleted: boolean;
 
   @Output() selectedRoute: EventEmitter<Route>;
 

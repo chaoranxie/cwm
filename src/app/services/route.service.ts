@@ -15,9 +15,6 @@ import { RouteActions } from '../store/actions';
 export class RouteService implements OnInit {
 
   private fbRoutes: FirebaseListObservable<any>;
-  private completionSubscription: Subscription;
-
-  public routeCompletionsBS: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(
     private db: AngularFireDatabase,
@@ -34,19 +31,7 @@ export class RouteService implements OnInit {
       }
     });
 
-    this.userService.user.subscribe(currentUser => {
-      if (currentUser !== null) {
-        // could test using db.list( to get a list back
-        this.completionSubscription = db.list(`/routeCompletions/${currentUser.uid}/`).subscribe(obj => {
-          this.routeCompletionsBS.next(obj);
-        });
-      } else {
-        if (this.completionSubscription) {
-          this.completionSubscription.unsubscribe()
-        }
-        this.routeCompletionsBS.next({});
-      }
-    });
+
   }
 
   addRoute(route: Route) {
@@ -61,11 +46,11 @@ export class RouteService implements OnInit {
     );
   }
 
-  completeRoute(routeKey: string) {
+  addCompletion(routeKey: string) {
     const userId = this.userService.afAuth.auth.currentUser.uid;
     this.db.object(`/routeCompletions/${userId}/${routeKey}`).set(true).then(
       (ret) => {
-        this.store.dispatch(this.routeActions.completeRouteSuccess(routeKey));
+        this.store.dispatch(this.routeActions.addCompletionSuccess(routeKey));
       },
       (error: Error) => {
         console.error(error);
@@ -81,12 +66,18 @@ export class RouteService implements OnInit {
     return this.fbRoutes;
   }
 
-  saveRoute(route: Route): Observable<Route> {
-    this.fbRoutes.push(route).then(ret => {
-
-    });
-
-    return Observable.of(route)
+  getCompletions(): Observable<string[]> {
+    if (this.userService.afAuth.auth.currentUser === null) {
+      return Observable.of([]);
+    } else {
+      const userId = this.userService.afAuth.auth.currentUser.uid;
+      // Note that it is important to do take 1 here or else
+      // we will constantly be emitting new obserable
+      // return this.db.list(`/routeCompletions/${userId}`).map(completions => {
+      return this.db.list(`/routeCompletions/${userId}`).take(1).map(completions => {
+        return completions.map(completion => completion.$key)
+      })
+    }
   }
 
 }

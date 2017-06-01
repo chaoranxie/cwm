@@ -20,7 +20,16 @@ export class RouteEffects {
       //   routeList.push(myRoute);
       // })
       return this.routeActions.loadRoutesSuccess(routes)
-    }
+      }
+    );
+
+  @Effect()
+  loadCompletions$ = this.actions$
+    .ofType(RouteActions.LOAD_COMPLETIONS)
+    .switchMap(() => this.svc.getCompletions())
+    .map((completions: string[]) => {
+      return this.routeActions.loadCompletionsSuccess(completions)
+      }
     );
 
   @Effect()
@@ -32,9 +41,9 @@ export class RouteEffects {
     .filter(() => false);
 
   @Effect()
-  completeRoute$ = this.actions$
-    .ofType(RouteActions.COMPLETE_ROUTE)
-    .do((action) => this.svc.completeRoute(action.payload))
+  addCompletion$ = this.actions$
+    .ofType(RouteActions.ADD_COMPLETION)
+    .do((action) => this.svc.addCompletion(action.payload))
     .filter(() => false);
   // Not sure why for completion route or saving question, it is different
   // .switchMap((action) => this.svc.completeRoute(action.payload))

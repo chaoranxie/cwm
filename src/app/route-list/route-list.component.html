@@ -21,6 +21,7 @@
     <app-route
       [route]="route"
       *ngFor="let route of routes"
+      [hasCompleted]="hasCompleted(route.$key)"
       (selectedRoute)="markRouteAsCompleted($event)"
     ></app-route>
   </div>
