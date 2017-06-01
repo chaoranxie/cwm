@@ -63,7 +63,7 @@ export class RouteService implements OnInit {
   }
 
   getRoutes(): Observable<Route[]> {
-    return this.fbRoutes;
+    return this.fbRoutes.take(1);
   }
 
   getCompletions(): Observable<string[]> {
