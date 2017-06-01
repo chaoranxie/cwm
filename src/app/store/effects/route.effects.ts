@@ -19,6 +19,7 @@ export class RouteEffects {
       //   const myRoute: Route = Route.fromJSON(routeJson);
       //   routeList.push(myRoute);
       // })
+      // debugger;
       return this.routeActions.loadRoutesSuccess(routes)
       }
     );

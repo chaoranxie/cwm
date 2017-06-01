@@ -37,11 +37,12 @@ export class RouteAddUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.route = new Route();
-    // this.route.station = 1;
-    // this.route.grade = 4;
-    // this.route.color ='blue';
-    // this.route.setter = 'other';
-    // this.route.type = 'both';
+    this.route.station = 1;
+    this.route.grade = 4;
+    this.route.color ='blue';
+    this.route.setter = 'other';
+    this.route.type = 'both';
+    // this.route.setDate="11/04/2018"
     this.createForm(this.route);
   }
 

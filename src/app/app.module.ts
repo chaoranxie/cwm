@@ -13,7 +13,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-import { AppComponent } from './components';
+import { AppComponent, DisplacerPortalDirective, DisplacerComponent } from './components';
 import { RouteComponent } from './route/route.component';
 import { RouteAddUpdateComponent } from './route/route-add-update.component';
 import { RouteListComponent } from './route-list/route-list.component';
@@ -32,7 +32,9 @@ import { routes } from './app.route';
     AppComponent,
     RouteListComponent,
     RouteComponent,
-    RouteAddUpdateComponent
+    RouteAddUpdateComponent,
+    DisplacerComponent,
+    DisplacerPortalDirective,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { routes } from './app.route';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule // imports firebase/auth, only needed for auth features
+
   ],
   providers: [
     RouteService,

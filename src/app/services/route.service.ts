@@ -27,7 +27,7 @@ export class RouteService implements OnInit {
       query: {
         orderByChild: 'grade',
         startAt: 4,
-        endAt: 4,
+        endAt: 10,
       }
     });
 
@@ -37,7 +37,17 @@ export class RouteService implements OnInit {
   addRoute(route: Route) {
     this.fbRoutes.push(route).then(
       (ret) => {
-        route.$key = ret.key;
+        // debugger;
+        // FIXME:
+        // This is weird, for newly added Route, i need to manually set the $key value
+        // i did this becasue or else you cant mark a new route as complete without a key,
+        // interesting though, this has not been an issue since everytime you get redirected
+        // to route/list, all the new route are retrieved again from server.
+
+        // for Route that i got back from the server they do have $key but it does not
+        // show up when you do Object.keys(route)
+
+        // route.$key = ret.key;
         this.store.dispatch(this.routeActions.addRouteSuccess(route));
       },
       (error: Error) => {
