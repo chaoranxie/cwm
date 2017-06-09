@@ -7,8 +7,7 @@
       </md-card-subtitle>
     </md-card-header>
      -->
-
-     <md-card-header>
+     <md-card-header [routerLink]="['/route/', route.$key]">
        <div md-card-avatar [ngStyle]="{'background-color': route.color, 'fill': route.color, 'color': route.color}">
        </div>
        <md-card-title><b>Grade:</b> 5.{{route.grade}} <b>Station:</b> {{route.station}} </md-card-title>

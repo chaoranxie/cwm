@@ -26,6 +26,7 @@ import { RouteService } from './services';
 import { RouteActions } from './store/actions';
 import { RouteEffects } from './store/effects';
 import { routes } from './app.route';
+import { RouteDetailComponent } from './route-detail/route-detail.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { routes } from './app.route';
     RouteAddUpdateComponent,
     DisplacerComponent,
     DisplacerPortalDirective,
+    RouteDetailComponent,
   ],
   imports: [
     BrowserModule,
