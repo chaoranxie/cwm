@@ -14,18 +14,23 @@ md-sidenav-layout {
   flex: 1 1 auto;
 }
 
-/* does not work*/
-.header {
+/* works with fnls-displacer but caused other issues*/
+.REMOVE.header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 0;
+  /* Does not work */
+  /*z-index: 5;*/
 }
 
-/*md-nav-list {
-  z-index: 3;
-}*/
+
+md-nav {
+  /* Does not work */
+  /*Not sure what exactly is the index set for fnls-displacer*/
+  /*z-index: 99000000;*/
+}
+
 /*
 .example-sidenav-content {
   display: flex;

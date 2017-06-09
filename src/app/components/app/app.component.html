@@ -36,7 +36,7 @@
 
 <div class="my-content">
 
-    <fnls-displacer>
+    <!-- <fnls-displacer> -->
     <md-toolbar class='header' color="primary">
       <button md-icon-button (click)="sidenav.open()">
         <md-icon>menu</md-icon>
@@ -45,7 +45,7 @@
       <span class="fill-remaining-space"></span>
       <span *ngIf="userService.user | async" md-line >{{(userService.user | async)?.displayName}}</span>
     </md-toolbar>
-    </fnls-displacer>
+    <!-- </fnls-displacer> -->
 
     <router-outlet></router-outlet>
 </div>
