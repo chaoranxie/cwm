@@ -1,22 +1,14 @@
-<p>
-  route-detail works!
-</p>
-<p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p><p>
-  route-detail works!
-</p>
+
+
+<div *ngIf="route; else loading">
+  <app-route
+    [route]="route"
+    [hasCompleted]="hasCompleted(route.$key)"
+    (selectedRoute)="markRouteAsCompleted($event)"
+  ></app-route>
+</div>
+<ng-template #loading>Loading Route Data...
+  <md-progress-spinner
+      mode="indeterminate">
+  </md-progress-spinner>
+</ng-template>
